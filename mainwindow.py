@@ -1,11 +1,12 @@
-VERSION = "0.0.1"
-DATE = "25.02.2026"
+VERSION = "0.0.2 Alpha"
+DATE = "05.04.2026"
 
 # This Python file uses the following encoding: utf-8
 import sys
 
 from PySide6.QtWidgets import QApplication, QMainWindow, QFrame, QMessageBox, QFileDialog
 from compare.tools import compare, get_table
+from optimize.tools import getTableByRequest, is_number
 
 # Important:
 # You need to run the following command to generate the ui_form.py file
@@ -49,8 +50,27 @@ class PandasModel(QAbstractTableModel):
     def data(self, index, role=Qt.DisplayRole):
         if index.isValid():
             if role == Qt.DisplayRole:
-                return str(self._data.iloc[index.row(), index.column()])
+                if pd.isna(self._data.iloc[index.row(), index.column()]):
+                    return ""
+                columns = self._data.columns.array
+                if is_number(self._data.iloc[index.row(), index.column()]) and columns[index.column()] != "Корпус":
+                    return f"{float(self._data.iloc[index.row(), index.column()]):g}"
+                    #return float(self._data.iloc[index.row(), index.column()])
+                else:
+                    return str(self._data.iloc[index.row(), index.column()])
+
         return None
+
+    def sort(self, column, order):
+            """Метод вызывается автоматически при клике на заголовок"""
+            self.layoutAboutToBeChanged.emit() # Уведомляем о начале изменений
+
+            # Сортируем сам DataFrame
+            ascending = (order == Qt.AscendingOrder)
+            col_name = self._data.columns[column]
+            self._data.sort_values(by=col_name, ascending=ascending, inplace=True)
+
+            self.layoutChanged.emit() # Уведомляем о завершении
 
     def headerData(self, section, orientation, role=Qt.DisplayRole):
         if role == Qt.DisplayRole:
@@ -58,6 +78,7 @@ class PandasModel(QAbstractTableModel):
                 return str(self._data.columns[section])
             elif orientation == Qt.Vertical:
                 return str(self._data.index[section])
+
         return None
 
 class MainWindow(QMainWindow):
@@ -70,13 +91,73 @@ class MainWindow(QMainWindow):
         self.ui.centralwidget.setLayout(self.ui.gridLayout)
         self.ui.groupBox.setLayout(self.ui.gridLayout_4)
         self.ui.compare.setLayout(self.ui.gridLayout_5)
+        self.ui.optimization.setLayout(self.ui.gridLayout_2)
 
         self.ui.compareButton.clicked.connect(self.compareButton_clicked)
+        self.ui.optimizeButton.clicked.connect(self.optimizeButton_clicked)
 
         self.ui.open_first.clicked.connect(self.open_first_clicked)
         self.ui.open_second.clicked.connect(self.open_second_clicked)
 
         self.ui.action.triggered.connect(self.show_about_dialog)
+
+    def optimizeButton_clicked(self):
+
+        first_file_name = self.ui.first_file.text()
+        first_file_count_column = self.ui.first_count.text()
+        first_file_pn_column = self.ui.first_pn.text()
+        first_file_skip_row = int(self.ui.first_skip.text())
+
+        table = get_table(first_file_name, f"{first_file_count_column}, C, {first_file_pn_column}, F, L", first_file_skip_row, ["count", "ref", "pn", "tm", "dpn"])
+
+        if self.ui.exceptDNP.isChecked():
+            table = table[table['tm'] != 'DNP']
+            table = table[table['tm'] != 'NM']
+
+        #table = table.fillna('X')
+
+        request = self.ui.requestLine.text()
+
+        optimizeTable = getTableByRequest(table, request)
+
+        tableView = self.ui.tableView
+
+        tableView.setModel(PandasModel(optimizeTable))
+        #tableView.resizeColumnsToContents()
+        tableView.setAlternatingRowColors(True)
+        tableView.verticalHeader().hide()
+        tableView.setSortingEnabled(True)
+
+        tableView.setShowGrid(False)
+        tableView.setStyleSheet("""
+            QTableView {
+
+                padding-top: 3px;
+                padding-bottom: 5px;
+
+                background-color: white;
+
+                selection-background-color: #3498db;
+                selection-color: white;
+                border: 1px solid rgba(0,0,0,0);
+            }
+            QTableView::item {
+                border: 1px solid #cccccc;
+                padding: 5px;
+            }
+            QHeaderView::section {
+                padding: 4px;
+                font-weight: bold;
+                border: 1px solid #cccccc;
+            }
+        """)
+        header = tableView.horizontalHeader()
+        header.setSectionResizeMode(QHeaderView.Stretch)
+        header.setSectionsMovable(True)
+        #tableView.resizeColumnsToContents()
+
+
+        pass
 
     def compareButton_clicked(self):
 

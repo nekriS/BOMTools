@@ -16,11 +16,12 @@ from PySide6.QtGui import (QAction, QBrush, QColor, QConicalGradient,
     QIcon, QImage, QKeySequence, QLinearGradient,
     QPainter, QPalette, QPixmap, QRadialGradient,
     QTransform)
-from PySide6.QtWidgets import (QApplication, QFrame, QGridLayout, QGroupBox,
-    QLabel, QLayout, QLineEdit, QMainWindow,
-    QMenu, QMenuBar, QProgressBar, QPushButton,
-    QSizePolicy, QSpacerItem, QSpinBox, QStatusBar,
-    QTabWidget, QToolBox, QWidget)
+from PySide6.QtWidgets import (QAbstractItemView, QApplication, QCheckBox, QFrame,
+    QGridLayout, QGroupBox, QHeaderView, QLabel,
+    QLayout, QLineEdit, QMainWindow, QMenu,
+    QMenuBar, QProgressBar, QPushButton, QSizePolicy,
+    QSpacerItem, QSpinBox, QStatusBar, QTabWidget,
+    QTableView, QToolBox, QWidget)
 
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
@@ -219,7 +220,7 @@ class Ui_MainWindow(object):
         self.compare.setObjectName(u"compare")
         self.gridLayoutWidget_3 = QWidget(self.compare)
         self.gridLayoutWidget_3.setObjectName(u"gridLayoutWidget_3")
-        self.gridLayoutWidget_3.setGeometry(QRect(10, 10, 801, 480))
+        self.gridLayoutWidget_3.setGeometry(QRect(10, 10, 801, 471))
         self.gridLayout_5 = QGridLayout(self.gridLayoutWidget_3)
         self.gridLayout_5.setObjectName(u"gridLayout_5")
         self.gridLayout_5.setSizeConstraint(QLayout.SizeConstraint.SetMinimumSize)
@@ -268,12 +269,12 @@ class Ui_MainWindow(object):
         self.toolBox.setMidLineWidth(0)
         self.page = QWidget()
         self.page.setObjectName(u"page")
-        self.page.setGeometry(QRect(0, 0, 789, 166))
+        self.page.setGeometry(QRect(0, 0, 789, 157))
         icon = QIcon(QIcon.fromTheme(QIcon.ThemeIcon.ApplicationExit))
         self.toolBox.addItem(self.page, icon, u"\u0412\u043a\u043b\u0430\u0434\u043a\u0430 1")
         self.page_2 = QWidget()
         self.page_2.setObjectName(u"page_2")
-        self.page_2.setGeometry(QRect(0, 0, 789, 166))
+        self.page_2.setGeometry(QRect(0, 0, 789, 157))
         self.toolBox.addItem(self.page_2, u"\u0412\u043a\u043b\u0430\u0434\u043a\u0430 2")
 
         self.gridLayout_5.addWidget(self.toolBox, 7, 0, 1, 3)
@@ -461,6 +462,95 @@ class Ui_MainWindow(object):
         self.tabWidget.addTab(self.compare, "")
         self.optimization = QWidget()
         self.optimization.setObjectName(u"optimization")
+        self.gridLayoutWidget_6 = QWidget(self.optimization)
+        self.gridLayoutWidget_6.setObjectName(u"gridLayoutWidget_6")
+        self.gridLayoutWidget_6.setGeometry(QRect(10, 10, 791, 351))
+        self.gridLayout_2 = QGridLayout(self.gridLayoutWidget_6)
+        self.gridLayout_2.setObjectName(u"gridLayout_2")
+        self.gridLayout_2.setContentsMargins(6, 6, 6, 6)
+        self.groupBox_4 = QGroupBox(self.gridLayoutWidget_6)
+        self.groupBox_4.setObjectName(u"groupBox_4")
+        self.groupBox_4.setMinimumSize(QSize(0, 100))
+        self.gridLayoutWidget_7 = QWidget(self.groupBox_4)
+        self.gridLayoutWidget_7.setObjectName(u"gridLayoutWidget_7")
+        self.gridLayoutWidget_7.setGeometry(QRect(10, 10, 771, 61))
+        self.gridLayout_8 = QGridLayout(self.gridLayoutWidget_7)
+        self.gridLayout_8.setObjectName(u"gridLayout_8")
+        self.gridLayout_8.setContentsMargins(0, 0, 0, 0)
+        self.optimizeButton = QPushButton(self.gridLayoutWidget_7)
+        self.optimizeButton.setObjectName(u"optimizeButton")
+        self.optimizeButton.setMinimumSize(QSize(176, 30))
+        self.optimizeButton.setMaximumSize(QSize(176, 30))
+        self.optimizeButton.setFont(font)
+        self.optimizeButton.setStyleSheet(u"QPushButton {\n"
+"	background-color: #EBEBEB;\n"
+"	border: 1px solid #CCCCCC;\n"
+"	padding: -2px 10px;\n"
+"	font-size: 14px;\n"
+"	border-radius: 5px;\n"
+"	margin: 0px;\n"
+"}\n"
+"\n"
+"QPushButton:hover {\n"
+"	background-color: #f5f5f5;\n"
+"border: 1px solid #f5f5f5;\n"
+"	color: black;\n"
+"}\n"
+"\n"
+"QPushButton:pressed {\n"
+"	background-color: #3399FF;\n"
+"	border: 1px solid #3399FF;\n"
+"	color: white;\n"
+"}")
+
+        self.gridLayout_8.addWidget(self.optimizeButton, 1, 1, 1, 1)
+
+        self.requestLine = QLineEdit(self.gridLayoutWidget_7)
+        self.requestLine.setObjectName(u"requestLine")
+        sizePolicy.setHeightForWidth(self.requestLine.sizePolicy().hasHeightForWidth())
+        self.requestLine.setSizePolicy(sizePolicy)
+        self.requestLine.setMinimumSize(QSize(176, 30))
+        self.requestLine.setMaximumSize(QSize(176, 30))
+        self.requestLine.setStyleSheet(u"\n"
+"	border: 1px solid #CCCCCC;\n"
+"	padding: -2px 10px;\n"
+"	font-size: 14px;\n"
+"	border-radius: 5px;\n"
+"")
+
+        self.gridLayout_8.addWidget(self.requestLine, 1, 0, 1, 1)
+
+        self.label_18 = QLabel(self.gridLayoutWidget_7)
+        self.label_18.setObjectName(u"label_18")
+        self.label_18.setMinimumSize(QSize(176, 16))
+        self.label_18.setMaximumSize(QSize(176, 16))
+
+        self.gridLayout_8.addWidget(self.label_18, 0, 0, 1, 1)
+
+        self.horizontalSpacer_3 = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
+
+        self.gridLayout_8.addItem(self.horizontalSpacer_3, 0, 3, 1, 1)
+
+        self.exceptDNP = QCheckBox(self.gridLayoutWidget_7)
+        self.exceptDNP.setObjectName(u"exceptDNP")
+        self.exceptDNP.setChecked(True)
+        self.exceptDNP.setTristate(False)
+
+        self.gridLayout_8.addWidget(self.exceptDNP, 1, 2, 1, 1)
+
+
+        self.gridLayout_2.addWidget(self.groupBox_4, 0, 0, 1, 1)
+
+        self.tableView = QTableView(self.gridLayoutWidget_6)
+        self.tableView.setObjectName(u"tableView")
+        self.tableView.setDragEnabled(False)
+        self.tableView.setSelectionBehavior(QAbstractItemView.SelectionBehavior.SelectRows)
+        self.tableView.setSortingEnabled(True)
+        self.tableView.horizontalHeader().setCascadingSectionResizes(False)
+        self.tableView.horizontalHeader().setStretchLastSection(False)
+
+        self.gridLayout_2.addWidget(self.tableView, 1, 0, 1, 1)
+
         self.tabWidget.addTab(self.optimization, "")
 
         self.gridLayout.addWidget(self.tabWidget, 1, 0, 1, 1)
@@ -483,7 +573,7 @@ class Ui_MainWindow(object):
 
         self.retranslateUi(MainWindow)
 
-        self.tabWidget.setCurrentIndex(0)
+        self.tabWidget.setCurrentIndex(1)
         self.toolBox.setCurrentIndex(0)
         self.toolBox.layout().setSpacing(4)
 
@@ -496,6 +586,7 @@ class Ui_MainWindow(object):
         self.action.setText(QCoreApplication.translate("MainWindow", u"\u041e \u043f\u0440\u043e\u0433\u0440\u0430\u043c\u043c\u0435", None))
         self.groupBox.setTitle(QCoreApplication.translate("MainWindow", u"\u0412\u0445\u043e\u0434\u043d\u043e\u0439 \u0444\u0430\u0439\u043b", None))
         self.label_3.setText(QCoreApplication.translate("MainWindow", u" \u0424\u0430\u0439\u043b:", None))
+        self.first_file.setText("")
         self.open_first.setText(QCoreApplication.translate("MainWindow", u"\u041e\u0442\u043a\u0440\u044b\u0442\u044c", None))
         self.label_4.setText(QCoreApplication.translate("MainWindow", u" \u0414\u0430\u0442\u0430 \u0440\u0435\u0434\u0430\u043a\u0442\u0438\u0440\u043e\u0432\u0430\u043d\u0438\u044f:", None))
         self.label.setText(QCoreApplication.translate("MainWindow", u"\u0424\u0430\u0439\u043b \u043d\u0435 \u043e\u0442\u043a\u0440\u044b\u0442", None))
@@ -522,6 +613,11 @@ class Ui_MainWindow(object):
         self.compareButton.setText(QCoreApplication.translate("MainWindow", u"\u0421\u0440\u0430\u0432\u043d\u0438\u0442\u044c", None))
         self.label_13.setText(QCoreApplication.translate("MainWindow", u" \u0420\u0435\u0437\u0443\u043b\u044c\u0442\u0430\u0442\u044b:", None))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.compare), QCoreApplication.translate("MainWindow", u"\u0421\u0440\u0430\u0432\u043d\u0435\u043d\u0438\u0435", None))
+        self.groupBox_4.setTitle("")
+        self.optimizeButton.setText(QCoreApplication.translate("MainWindow", u"\u041e\u0442\u043e\u0431\u0440\u0430\u0437\u0438\u0442\u044c", None))
+        self.requestLine.setText(QCoreApplication.translate("MainWindow", u"C-????-", None))
+        self.label_18.setText(QCoreApplication.translate("MainWindow", u"\u0417\u0430\u043f\u0440\u043e\u0441:", None))
+        self.exceptDNP.setText(QCoreApplication.translate("MainWindow", u"\u0418\u0441\u043a\u043b\u044e\u0447\u0438\u0442\u044c DNP/NM", None))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.optimization), QCoreApplication.translate("MainWindow", u"\u041e\u043f\u0442\u0438\u043c\u0438\u0437\u0430\u0446\u0438\u044f", None))
         self.menu.setTitle(QCoreApplication.translate("MainWindow", u"\u0421\u043f\u0440\u0430\u0432\u043a\u0430", None))
     # retranslateUi
