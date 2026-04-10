@@ -19,15 +19,15 @@ from PySide6.QtGui import (QAction, QBrush, QColor, QConicalGradient,
 from PySide6.QtWidgets import (QAbstractItemView, QApplication, QCheckBox, QFrame,
     QGridLayout, QGroupBox, QHeaderView, QLabel,
     QLayout, QLineEdit, QMainWindow, QMenu,
-    QMenuBar, QProgressBar, QPushButton, QSizePolicy,
-    QSpacerItem, QSpinBox, QStatusBar, QTabWidget,
-    QTableView, QToolBox, QWidget)
+    QMenuBar, QPlainTextEdit, QProgressBar, QPushButton,
+    QSizePolicy, QSpacerItem, QSpinBox, QStatusBar,
+    QTabWidget, QTableView, QToolBox, QWidget)
 
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         if not MainWindow.objectName():
             MainWindow.setObjectName(u"MainWindow")
-        MainWindow.resize(844, 754)
+        MainWindow.resize(1110, 832)
         self.action = QAction(MainWindow)
         self.action.setObjectName(u"action")
         self.centralwidget = QWidget(MainWindow)
@@ -35,7 +35,7 @@ class Ui_MainWindow(object):
         self.centralwidget.setEnabled(True)
         self.gridLayoutWidget = QWidget(self.centralwidget)
         self.gridLayoutWidget.setObjectName(u"gridLayoutWidget")
-        self.gridLayoutWidget.setGeometry(QRect(10, 10, 831, 621))
+        self.gridLayoutWidget.setGeometry(QRect(10, 10, 1081, 791))
         self.gridLayout = QGridLayout(self.gridLayoutWidget)
         self.gridLayout.setObjectName(u"gridLayout")
         self.gridLayout.setContentsMargins(6, 6, 6, 6)
@@ -52,7 +52,7 @@ class Ui_MainWindow(object):
         self.groupBox.setMinimumSize(QSize(0, 180))
         self.gridLayoutWidget_2 = QWidget(self.groupBox)
         self.gridLayoutWidget_2.setObjectName(u"gridLayoutWidget_2")
-        self.gridLayoutWidget_2.setGeometry(QRect(10, 20, 801, 160))
+        self.gridLayoutWidget_2.setGeometry(QRect(10, 20, 1051, 160))
         self.gridLayout_4 = QGridLayout(self.gridLayoutWidget_2)
         self.gridLayout_4.setObjectName(u"gridLayout_4")
         self.gridLayout_4.setSizeConstraint(QLayout.SizeConstraint.SetMinimumSize)
@@ -220,17 +220,11 @@ class Ui_MainWindow(object):
         self.compare.setObjectName(u"compare")
         self.gridLayoutWidget_3 = QWidget(self.compare)
         self.gridLayoutWidget_3.setObjectName(u"gridLayoutWidget_3")
-        self.gridLayoutWidget_3.setGeometry(QRect(10, 10, 801, 471))
+        self.gridLayoutWidget_3.setGeometry(QRect(10, 10, 1051, 510))
         self.gridLayout_5 = QGridLayout(self.gridLayoutWidget_3)
         self.gridLayout_5.setObjectName(u"gridLayout_5")
         self.gridLayout_5.setSizeConstraint(QLayout.SizeConstraint.SetMinimumSize)
         self.gridLayout_5.setContentsMargins(6, 6, 6, 6)
-        self.label_6 = QLabel(self.gridLayoutWidget_3)
-        self.label_6.setObjectName(u"label_6")
-        self.label_6.setMaximumSize(QSize(16777215, 16))
-
-        self.gridLayout_5.addWidget(self.label_6, 0, 0, 1, 1)
-
         self.toolBox = QToolBox(self.gridLayoutWidget_3)
         self.toolBox.setObjectName(u"toolBox")
         self.toolBox.setMinimumSize(QSize(0, 0))
@@ -269,12 +263,12 @@ class Ui_MainWindow(object):
         self.toolBox.setMidLineWidth(0)
         self.page = QWidget()
         self.page.setObjectName(u"page")
-        self.page.setGeometry(QRect(0, 0, 789, 157))
+        self.page.setGeometry(QRect(0, 0, 783, 196))
         icon = QIcon(QIcon.fromTheme(QIcon.ThemeIcon.ApplicationExit))
         self.toolBox.addItem(self.page, icon, u"\u0412\u043a\u043b\u0430\u0434\u043a\u0430 1")
         self.page_2 = QWidget()
         self.page_2.setObjectName(u"page_2")
-        self.page_2.setGeometry(QRect(0, 0, 789, 157))
+        self.page_2.setGeometry(QRect(0, 0, 783, 196))
         self.toolBox.addItem(self.page_2, u"\u0412\u043a\u043b\u0430\u0434\u043a\u0430 2")
 
         self.gridLayout_5.addWidget(self.toolBox, 7, 0, 1, 3)
@@ -309,38 +303,16 @@ class Ui_MainWindow(object):
 
         self.gridLayout_5.addWidget(self.open_second, 1, 0, 1, 1)
 
-        self.label_7 = QLabel(self.gridLayoutWidget_3)
-        self.label_7.setObjectName(u"label_7")
-
-        self.gridLayout_5.addWidget(self.label_7, 0, 1, 1, 1)
-
-        self.second_file = QLineEdit(self.gridLayoutWidget_3)
-        self.second_file.setObjectName(u"second_file")
-        self.second_file.setMinimumSize(QSize(0, 30))
-        self.second_file.setStyleSheet(u"\n"
-"	border: 1px solid #CCCCCC;\n"
-"	padding: -2px 10px;\n"
-"	font-size: 14px;\n"
-"	border-radius: 5px;\n"
-"")
-        self.second_file.setReadOnly(True)
-
-        self.gridLayout_5.addWidget(self.second_file, 1, 1, 1, 1)
-
         self.label_8 = QLabel(self.gridLayoutWidget_3)
         self.label_8.setObjectName(u"label_8")
 
         self.gridLayout_5.addWidget(self.label_8, 0, 2, 1, 1)
 
-        self.label_5 = QLabel(self.gridLayoutWidget_3)
-        self.label_5.setObjectName(u"label_5")
-        self.label_5.setMinimumSize(QSize(278, 0))
-        self.label_5.setMaximumSize(QSize(278, 16777215))
-        self.label_5.setStyleSheet(u"\n"
-"	font-size: 14px;\n"
-"")
+        self.label_6 = QLabel(self.gridLayoutWidget_3)
+        self.label_6.setObjectName(u"label_6")
+        self.label_6.setMaximumSize(QSize(16777215, 16))
 
-        self.gridLayout_5.addWidget(self.label_5, 1, 2, 1, 1)
+        self.gridLayout_5.addWidget(self.label_6, 0, 0, 1, 1)
 
         self.groupBox_3 = QGroupBox(self.gridLayoutWidget_3)
         self.groupBox_3.setObjectName(u"groupBox_3")
@@ -449,6 +421,21 @@ class Ui_MainWindow(object):
 
         self.gridLayout_5.addWidget(self.groupBox_3, 2, 0, 1, 3)
 
+        self.label_13 = QLabel(self.gridLayoutWidget_3)
+        self.label_13.setObjectName(u"label_13")
+
+        self.gridLayout_5.addWidget(self.label_13, 4, 0, 3, 1)
+
+        self.label_5 = QLabel(self.gridLayoutWidget_3)
+        self.label_5.setObjectName(u"label_5")
+        self.label_5.setMinimumSize(QSize(278, 0))
+        self.label_5.setMaximumSize(QSize(278, 16777215))
+        self.label_5.setStyleSheet(u"\n"
+"	font-size: 14px;\n"
+"")
+
+        self.gridLayout_5.addWidget(self.label_5, 1, 2, 1, 1)
+
         self.compareButton = QPushButton(self.gridLayoutWidget_3)
         self.compareButton.setObjectName(u"compareButton")
         self.compareButton.setMinimumSize(QSize(0, 30))
@@ -475,12 +462,65 @@ class Ui_MainWindow(object):
 
         self.gridLayout_5.addWidget(self.compareButton, 3, 0, 1, 1)
 
-        self.label_13 = QLabel(self.gridLayoutWidget_3)
-        self.label_13.setObjectName(u"label_13")
+        self.label_17 = QLabel(self.gridLayoutWidget_3)
+        self.label_17.setObjectName(u"label_17")
 
-        self.gridLayout_5.addWidget(self.label_13, 4, 0, 1, 1)
+        self.gridLayout_5.addWidget(self.label_17, 0, 3, 1, 1)
 
-        self.gridLayout_5.setRowMinimumHeight(2, 80)
+        self.second_file = QLineEdit(self.gridLayoutWidget_3)
+        self.second_file.setObjectName(u"second_file")
+        self.second_file.setMinimumSize(QSize(0, 30))
+        self.second_file.setStyleSheet(u"\n"
+"	border: 1px solid #CCCCCC;\n"
+"	padding: -2px 10px;\n"
+"	font-size: 14px;\n"
+"	border-radius: 5px;\n"
+"")
+        self.second_file.setReadOnly(True)
+
+        self.gridLayout_5.addWidget(self.second_file, 1, 1, 1, 1)
+
+        self.label_7 = QLabel(self.gridLayoutWidget_3)
+        self.label_7.setObjectName(u"label_7")
+
+        self.gridLayout_5.addWidget(self.label_7, 0, 1, 1, 1)
+
+        self.resultText = QPlainTextEdit(self.gridLayoutWidget_3)
+        self.resultText.setObjectName(u"resultText")
+        self.resultText.setMinimumSize(QSize(100, 0))
+        self.resultText.setMaximumSize(QSize(250, 16777215))
+        self.resultText.setReadOnly(True)
+
+        self.gridLayout_5.addWidget(self.resultText, 2, 3, 6, 1)
+
+        self.copyResult = QPushButton(self.gridLayoutWidget_3)
+        self.copyResult.setObjectName(u"copyResult")
+        self.copyResult.setMinimumSize(QSize(176, 30))
+        self.copyResult.setMaximumSize(QSize(176, 30))
+        self.copyResult.setFont(font2)
+        self.copyResult.setStyleSheet(u"QPushButton {\n"
+"	background-color: #EBEBEB;\n"
+"	border: 1px solid #CCCCCC;\n"
+"	padding: -2px 10px;\n"
+"	font-size: 14px;\n"
+"	border-radius: 5px;\n"
+"	margin: 0px;\n"
+"}\n"
+"\n"
+"QPushButton:hover {\n"
+"	background-color: #f5f5f5;\n"
+"border: 1px solid #f5f5f5;\n"
+"	color: black;\n"
+"}\n"
+"\n"
+"QPushButton:pressed {\n"
+"	background-color: #3399FF;\n"
+"	border: 1px solid #3399FF;\n"
+"	color: white;\n"
+"}")
+
+        self.gridLayout_5.addWidget(self.copyResult, 1, 3, 1, 1)
+
         self.tabWidget.addTab(self.compare, "")
         self.optimization = QWidget()
         self.optimization.setObjectName(u"optimization")
@@ -582,7 +622,7 @@ class Ui_MainWindow(object):
         MainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QMenuBar(MainWindow)
         self.menubar.setObjectName(u"menubar")
-        self.menubar.setGeometry(QRect(0, 0, 844, 22))
+        self.menubar.setGeometry(QRect(0, 0, 1110, 22))
         self.menu = QMenu(self.menubar)
         self.menu.setObjectName(u"menu")
         MainWindow.setMenuBar(self.menubar)
@@ -619,13 +659,11 @@ class Ui_MainWindow(object):
         self.first_count.setText(QCoreApplication.translate("MainWindow", u"B", None))
         self.first_pn.setText(QCoreApplication.translate("MainWindow", u"D", None))
         self.label_14.setText(QCoreApplication.translate("MainWindow", u" \u0421\u0442\u043e\u043b\u0431\u0435\u0446 \u043d\u043e\u043c\u0435\u043d\u043a\u043b\u0430\u0442\u0443\u0440\u044b:", None))
-        self.label_6.setText(QCoreApplication.translate("MainWindow", u" \u041f\u0435\u0440\u0435\u0447\u0435\u043d\u044c \u044d\u043b\u0435\u043c\u0435\u043d\u0442\u043e\u0432:", None))
         self.toolBox.setItemText(self.toolBox.indexOf(self.page), QCoreApplication.translate("MainWindow", u"\u0412\u043a\u043b\u0430\u0434\u043a\u0430 1", None))
         self.toolBox.setItemText(self.toolBox.indexOf(self.page_2), QCoreApplication.translate("MainWindow", u"\u0412\u043a\u043b\u0430\u0434\u043a\u0430 2", None))
         self.open_second.setText(QCoreApplication.translate("MainWindow", u"\u041e\u0442\u043a\u0440\u044b\u0442\u044c", None))
-        self.label_7.setText(QCoreApplication.translate("MainWindow", u" \u0424\u0430\u0439\u043b:", None))
         self.label_8.setText(QCoreApplication.translate("MainWindow", u" \u0414\u0430\u0442\u0430 \u0440\u0435\u0434\u0430\u043a\u0442\u0438\u0440\u043e\u0432\u0430\u043d\u0438\u044f:", None))
-        self.label_5.setText(QCoreApplication.translate("MainWindow", u"\u0424\u0430\u0439\u043b \u043d\u0435 \u043e\u0442\u043a\u0440\u044b\u0442", None))
+        self.label_6.setText(QCoreApplication.translate("MainWindow", u" \u041f\u0435\u0440\u0435\u0447\u0435\u043d\u044c \u044d\u043b\u0435\u043c\u0435\u043d\u0442\u043e\u0432:", None))
         self.groupBox_3.setTitle(QCoreApplication.translate("MainWindow", u"\u041d\u0430\u0441\u0442\u0440\u043e\u0439\u043a\u0438", None))
         self.label_12.setText(QCoreApplication.translate("MainWindow", u" \u0421\u0442\u043e\u043b\u0431\u0435\u0446 \u043a\u043e\u043b\u0438\u0447\u0435\u0441\u0442\u0432\u0430:", None))
         self.second_count.setText(QCoreApplication.translate("MainWindow", u"B", None))
@@ -633,9 +671,13 @@ class Ui_MainWindow(object):
         self.label_11.setText(QCoreApplication.translate("MainWindow", u" \u041f\u0440\u043e\u043f\u0443\u0441\u0442\u0438\u0442\u044c \u0441\u0442\u0440\u043e\u043a:", None))
         self.second_pn.setText(QCoreApplication.translate("MainWindow", u"D", None))
         self.label_16.setText(QCoreApplication.translate("MainWindow", u"\u041a. \u041b\u0435\u0432\u0435\u043d\u0448\u0442\u0435\u0439\u043d\u0430:", None))
-        self.koef.setText(QCoreApplication.translate("MainWindow", u"0.9", None))
-        self.compareButton.setText(QCoreApplication.translate("MainWindow", u"\u0421\u0440\u0430\u0432\u043d\u0438\u0442\u044c", None))
+        self.koef.setText(QCoreApplication.translate("MainWindow", u"0.85", None))
         self.label_13.setText(QCoreApplication.translate("MainWindow", u" \u0420\u0435\u0437\u0443\u043b\u044c\u0442\u0430\u0442\u044b:", None))
+        self.label_5.setText(QCoreApplication.translate("MainWindow", u"\u0424\u0430\u0439\u043b \u043d\u0435 \u043e\u0442\u043a\u0440\u044b\u0442", None))
+        self.compareButton.setText(QCoreApplication.translate("MainWindow", u"\u0421\u0440\u0430\u0432\u043d\u0438\u0442\u044c", None))
+        self.label_17.setText(QCoreApplication.translate("MainWindow", u"\u0420\u0435\u0437\u0443\u043b\u044c\u0442\u0430\u0442:", None))
+        self.label_7.setText(QCoreApplication.translate("MainWindow", u" \u0424\u0430\u0439\u043b:", None))
+        self.copyResult.setText(QCoreApplication.translate("MainWindow", u"\u0421\u043a\u043e\u043f\u0438\u0440\u043e\u0432\u0430\u0442\u044c", None))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.compare), QCoreApplication.translate("MainWindow", u"\u0421\u0440\u0430\u0432\u043d\u0435\u043d\u0438\u0435", None))
         self.groupBox_4.setTitle("")
         self.optimizeButton.setText(QCoreApplication.translate("MainWindow", u"\u041e\u0442\u043e\u0431\u0440\u0430\u0437\u0438\u0442\u044c", None))

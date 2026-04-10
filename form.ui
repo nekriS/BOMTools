@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>844</width>
-    <height>754</height>
+    <width>1110</width>
+    <height>832</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -22,8 +22,8 @@
      <rect>
       <x>10</x>
       <y>10</y>
-      <width>831</width>
-      <height>621</height>
+      <width>1081</width>
+      <height>791</height>
      </rect>
     </property>
     <layout class="QGridLayout" name="gridLayout" rowstretch="0,1,0" rowminimumheight="180,0,0">
@@ -68,7 +68,7 @@
          <rect>
           <x>10</x>
           <y>20</y>
-          <width>801</width>
+          <width>1051</width>
           <height>160</height>
          </rect>
         </property>
@@ -421,11 +421,11 @@ QPushButton:pressed {
           <rect>
            <x>10</x>
            <y>10</y>
-           <width>801</width>
-           <height>471</height>
+           <width>1051</width>
+           <height>510</height>
           </rect>
          </property>
-         <layout class="QGridLayout" name="gridLayout_5" rowstretch="0,0,0,0,0,0,0,0" rowminimumheight="0,0,80,0,0,0,0,0">
+         <layout class="QGridLayout" name="gridLayout_5" rowstretch="0,0,0,0,0,0,0,0" columnstretch="0,0,0,0" rowminimumheight="0,0,0,0,0,0,0,0" columnminimumwidth="0,0,0,0">
           <property name="sizeConstraint">
            <enum>QLayout::SizeConstraint::SetMinimumSize</enum>
           </property>
@@ -441,19 +441,6 @@ QPushButton:pressed {
           <property name="bottomMargin">
            <number>6</number>
           </property>
-          <item row="0" column="0">
-           <widget class="QLabel" name="label_6">
-            <property name="maximumSize">
-             <size>
-              <width>16777215</width>
-              <height>16</height>
-             </size>
-            </property>
-            <property name="text">
-             <string> Перечень элементов:</string>
-            </property>
-           </widget>
-          </item>
           <item row="7" column="0" colspan="3">
            <widget class="QToolBox" name="toolBox">
             <property name="minimumSize">
@@ -528,8 +515,8 @@ QPushButton:pressed {
               <rect>
                <x>0</x>
                <y>0</y>
-               <width>789</width>
-               <height>157</height>
+               <width>783</width>
+               <height>196</height>
               </rect>
              </property>
              <attribute name="icon">
@@ -544,8 +531,8 @@ QPushButton:pressed {
               <rect>
                <x>0</x>
                <y>0</y>
-               <width>789</width>
-               <height>157</height>
+               <width>783</width>
+               <height>196</height>
               </rect>
              </property>
              <attribute name="label">
@@ -601,34 +588,6 @@ QPushButton:pressed {
             </property>
            </widget>
           </item>
-          <item row="0" column="1">
-           <widget class="QLabel" name="label_7">
-            <property name="text">
-             <string> Файл:</string>
-            </property>
-           </widget>
-          </item>
-          <item row="1" column="1">
-           <widget class="QLineEdit" name="second_file">
-            <property name="minimumSize">
-             <size>
-              <width>0</width>
-              <height>30</height>
-             </size>
-            </property>
-            <property name="styleSheet">
-             <string notr="true">
-	border: 1px solid #CCCCCC;
-	padding: -2px 10px;
-	font-size: 14px;
-	border-radius: 5px;
-</string>
-            </property>
-            <property name="readOnly">
-             <bool>true</bool>
-            </property>
-           </widget>
-          </item>
           <item row="0" column="2">
            <widget class="QLabel" name="label_8">
             <property name="text">
@@ -636,27 +595,16 @@ QPushButton:pressed {
             </property>
            </widget>
           </item>
-          <item row="1" column="2">
-           <widget class="QLabel" name="label_5">
-            <property name="minimumSize">
-             <size>
-              <width>278</width>
-              <height>0</height>
-             </size>
-            </property>
+          <item row="0" column="0">
+           <widget class="QLabel" name="label_6">
             <property name="maximumSize">
              <size>
-              <width>278</width>
-              <height>16777215</height>
+              <width>16777215</width>
+              <height>16</height>
              </size>
             </property>
-            <property name="styleSheet">
-             <string notr="true">
-	font-size: 14px;
-</string>
-            </property>
             <property name="text">
-             <string>Файл не открыт</string>
+             <string> Перечень элементов:</string>
             </property>
            </widget>
           </item>
@@ -897,6 +845,37 @@ QPushButton:pressed {
             </widget>
            </widget>
           </item>
+          <item row="4" column="0" rowspan="3">
+           <widget class="QLabel" name="label_13">
+            <property name="text">
+             <string> Результаты:</string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="2">
+           <widget class="QLabel" name="label_5">
+            <property name="minimumSize">
+             <size>
+              <width>278</width>
+              <height>0</height>
+             </size>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>278</width>
+              <height>16777215</height>
+             </size>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">
+	font-size: 14px;
+</string>
+            </property>
+            <property name="text">
+             <string>Файл не открыт</string>
+            </property>
+           </widget>
+          </item>
           <item row="3" column="0">
            <widget class="QPushButton" name="compareButton">
             <property name="minimumSize">
@@ -932,10 +911,104 @@ QPushButton:pressed {
             </property>
            </widget>
           </item>
-          <item row="4" column="0">
-           <widget class="QLabel" name="label_13">
+          <item row="0" column="3">
+           <widget class="QLabel" name="label_17">
             <property name="text">
-             <string> Результаты:</string>
+             <string>Результат:</string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="1">
+           <widget class="QLineEdit" name="second_file">
+            <property name="minimumSize">
+             <size>
+              <width>0</width>
+              <height>30</height>
+             </size>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">
+	border: 1px solid #CCCCCC;
+	padding: -2px 10px;
+	font-size: 14px;
+	border-radius: 5px;
+</string>
+            </property>
+            <property name="readOnly">
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="1">
+           <widget class="QLabel" name="label_7">
+            <property name="text">
+             <string> Файл:</string>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="3" rowspan="6">
+           <widget class="QPlainTextEdit" name="resultText">
+            <property name="minimumSize">
+             <size>
+              <width>100</width>
+              <height>0</height>
+             </size>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>250</width>
+              <height>16777215</height>
+             </size>
+            </property>
+            <property name="readOnly">
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="3">
+           <widget class="QPushButton" name="copyResult">
+            <property name="minimumSize">
+             <size>
+              <width>176</width>
+              <height>30</height>
+             </size>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>176</width>
+              <height>30</height>
+             </size>
+            </property>
+            <property name="font">
+             <font>
+              <pointsize>-1</pointsize>
+              <bold>false</bold>
+             </font>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">QPushButton {
+	background-color: #EBEBEB;
+	border: 1px solid #CCCCCC;
+	padding: -2px 10px;
+	font-size: 14px;
+	border-radius: 5px;
+	margin: 0px;
+}
+
+QPushButton:hover {
+	background-color: #f5f5f5;
+border: 1px solid #f5f5f5;
+	color: black;
+}
+
+QPushButton:pressed {
+	background-color: #3399FF;
+	border: 1px solid #3399FF;
+	color: white;
+}</string>
+            </property>
+            <property name="text">
+             <string>Скопировать</string>
             </property>
            </widget>
           </item>
@@ -1149,7 +1222,7 @@ QPushButton:pressed {
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>844</width>
+     <width>1110</width>
      <height>22</height>
     </rect>
    </property>

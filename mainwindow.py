@@ -1,5 +1,5 @@
-VERSION = "0.0.2 Alpha"
-DATE = "05.04.2026"
+VERSION = "0.0.3"
+DATE = "10.04.2026"
 
 # This Python file uses the following encoding: utf-8
 import sys
@@ -26,7 +26,7 @@ import pandas as pd
 from pathlib import Path
 from datetime import datetime
 import os
-
+import pyperclip
 
 def resource_path(relative_path):
     """Получить абсолютный путь к ресурсу, работает для dev и PyInstaller"""
@@ -96,10 +96,16 @@ class MainWindow(QMainWindow):
         self.ui.compareButton.clicked.connect(self.compareButton_clicked)
         self.ui.optimizeButton.clicked.connect(self.optimizeButton_clicked)
 
+        self.ui.copyResult.clicked.connect(self.copyResultButton_clicked)
+
         self.ui.open_first.clicked.connect(self.open_first_clicked)
         self.ui.open_second.clicked.connect(self.open_second_clicked)
 
         self.ui.action.triggered.connect(self.show_about_dialog)
+
+
+    def copyResultButton_clicked(self):
+        pyperclip.copy(self.ui.resultText.toPlainText())
 
     def optimizeButton_clicked(self):
 
@@ -181,7 +187,7 @@ class MainWindow(QMainWindow):
 
         #print(dfs)
 
-        titles = ["Без изменений", "Изменилось количество", "Изменилось написание", "Изменилось количество и написание", "Убраны", "Добавлены"]
+        titles = ["Без изменений", "Изменилось количество", "Изменилось написание", "Изменилось количество и написание", "Убрано", "Добавлено"]
 
         for i in reversed(range(self.ui.toolBox.count())):
             widget = self.ui.toolBox.widget(i)
@@ -189,6 +195,18 @@ class MainWindow(QMainWindow):
             widget.deleteLater()
 
         for i, (df, title) in enumerate(zip(dfs, titles)):
+
+            if title != "Без изменений" and len(df) > 0:
+
+                self.ui.resultText.setPlainText(self.ui.resultText.toPlainText() + f"{title}:\n")
+
+                for row in df.itertuples(index=False):
+                    print(len(row))
+                    if len(row) == 2:
+                        self.ui.resultText.setPlainText(self.ui.resultText.toPlainText() + f"{row[1]} ({row[0]})\n")
+                    else:
+                        self.ui.resultText.setPlainText(self.ui.resultText.toPlainText() + f"{row[1]} ({row[0]}) на {row[3]} ({row[2]})\n")
+
 
             if len(df.columns) == 2:
                 df.columns = ["Кол., шт (1)", "Номенклатура (1)"]
