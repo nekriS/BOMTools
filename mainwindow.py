@@ -113,8 +113,9 @@ class MainWindow(QMainWindow):
         first_file_count_column = self.ui.first_count.text()
         first_file_pn_column = self.ui.first_pn.text()
         first_file_skip_row = int(self.ui.first_skip.text())
+        first_file_mount = self.ui.firstMount.text()
 
-        table = get_table(first_file_name, f"{first_file_count_column}, C, {first_file_pn_column}, F, L", first_file_skip_row, ["count", "ref", "pn", "tm", "dpn"])
+        table = get_table(first_file_name, f"{first_file_count_column}, C, {first_file_pn_column}, {first_file_mount}, L", first_file_skip_row, ["count", "ref", "pn", "tm", "dpn"])
 
         if self.ui.exceptDNP.isChecked():
             table = table[table['tm'] != 'DNP']
@@ -167,23 +168,37 @@ class MainWindow(QMainWindow):
 
     def compareButton_clicked(self):
 
+        self.ui.resultText.setPlainText("")
+
         first_file_name = self.ui.first_file.text()
         first_file_count_column = self.ui.first_count.text()
         first_file_pn_column = self.ui.first_pn.text()
         first_file_skip_row = int(self.ui.first_skip.text())
+        first_file_skip_row = int(self.ui.first_skip.text())
+        first_file_mount = self.ui.firstMount.text()
 
-        first_table = get_table(first_file_name, f"{first_file_count_column}, {first_file_pn_column}", first_file_skip_row, ["count", "pn"])
+        first_table = get_table(first_file_name, f"{first_file_count_column}, {first_file_pn_column}, {first_file_mount}", first_file_skip_row, ["count", "pn", "tm"])
 
         second_file_name = self.ui.second_file.text()
         second_file_count_column = self.ui.second_count.text()
         second_file_pn_column = self.ui.second_pn.text()
         second_file_skip_row = int(self.ui.second_skip.text())
+        second_file_mount = self.ui.secondMount.text()
 
-        second_table = get_table(second_file_name, f"{second_file_count_column}, {second_file_pn_column}", second_file_skip_row, ["count", "pn"])
+        second_table = get_table(second_file_name, f"{second_file_count_column}, {second_file_pn_column}, {second_file_mount}", second_file_skip_row, ["count", "pn", "tm"])
+
+        if self.ui.exceptDNP.isChecked():
+            first_table = first_table[first_table['tm'] != 'DNP']
+            first_table = first_table[first_table['tm'] != 'NM']
+            second_table = second_table[second_table['tm'] != 'DNP']
+            second_table = second_table[second_table['tm'] != 'NM']
+
+        first_table = first_table.drop(['tm'], axis=1)
+        second_table = second_table.drop(['tm'], axis=1)
 
         kLevenshtein = float(self.ui.koef.text())
 
-        dfs = compare(first_table, second_table, kLevenshtein)
+        dfs = compare(second_table, first_table, kLevenshtein)
 
         #print(dfs)
 
@@ -359,7 +374,7 @@ class MainWindow(QMainWindow):
         QMessageBox.about(
             self,
             "О программе",
-            "Название программы: searchBASE    \n"
+            "Название программы: BOMTools    \n"
             "Версия: " + VERSION + "\n"
             "Автор: Лев Кириллов\n"
             "Дата сборки: " + DATE + "\n"
