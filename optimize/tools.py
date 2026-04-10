@@ -26,6 +26,7 @@ SUFFIXIES = {
     "M": 10 ** 6,
     "R": 1
 }
+TYPES = ["C", "R"]
 
 def is_number(s: str) -> bool:
     try:
@@ -63,7 +64,13 @@ def reIndexBySubsequence(table, subsequence):
 
     return  table[columnSubsequence]
 
-    
+def getTypeByReference(reference):
+    cType = reference.strip()[0]
+
+    if cType in TYPES:
+        return cType
+    else:
+        return None
 
 def getTableByRequest(table, request):
 
@@ -74,7 +81,7 @@ def getTableByRequest(table, request):
             #new_row = row
             #print(row)
 
-            new_row = concatRow(row, splittedLine(row['pn']))
+            new_row = concatRow(row, splittedLine(row['pn'], getTypeByReference(row['ref'])))
             
             #print(new_row)
             #new_row = splittedLine(row['pn'])
@@ -113,15 +120,19 @@ def getFloat(strValue):
                     return -1
     return -2
 
-def splittedLine(partNumber, stripSymbol = "-"):
+def splittedLine(partNumber, forcedType = None, stripSymbol = "-"):
     
     package = ""
     dielectric = ""
     voltage = -1
     tolerance = -1
     value = -1
-    
+
     stripLine = partNumber.split(stripSymbol)
+
+    if forcedType != None and stripLine[0] in PACKAGES:
+        partNumber = f"{forcedType}-{partNumber}"
+        stripLine = partNumber.split(stripSymbol)
     #print(stripLine)
 
     componentType = stripLine[0]
@@ -156,10 +167,8 @@ def splittedLine(partNumber, stripSymbol = "-"):
     
 
 if __name__ == "__main__":
-    d = splittedLine("C-0603-NP0-50-100pF K")
+    d = splittedLine("0201-10K F", getTypeByReference("R176 R179 R182-183 R140 R193-196 R209-210 R225-231 R238-239 R251-252 R294 R297 R300 R303-308 R311-312 R314-321 R324-325 R328-329 R331-335 R345-347 R350-351 R354-355 R357-364 R367-368 R371-372 R374-377 R379-380 R383-384 R387-388 R391-392 R394-401 R404-405 R408-409 R411-418 R425-426 R428-435 R442-443 R445-452 R457-460 R463 R465 R471-477 R480-483 R168 R485-492 R495-504 R507-518 R521-528 R530 R532 R536-537 R540 R170"))
 
-    d = pd.DataFrame()
+    
 
-    print(d.columns.array)
-
-    print(getFloat("1K"))
+    print(d)

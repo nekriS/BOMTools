@@ -121,6 +121,8 @@ class MainWindow(QMainWindow):
             table = table[table['tm'] != 'DNP']
             table = table[table['tm'] != 'NM']
 
+        print(table)
+
         #table = table.fillna('X')
 
         request = self.ui.requestLine.text()

@@ -17,10 +17,10 @@ def get_var_name(var):
 def get_table(file_name, column, skip_row, columns_name=[]):
 
     try:
-        table = pd.read_excel(file_name, usecols=f"{column}", skiprows=skip_row).dropna()
+        table = pd.read_excel(file_name, usecols=f"{column}", skiprows=skip_row)
         if columns_name != []:
             table.columns = columns_name
-        return table
+        return table.dropna(subset=["pn"])
     except:
         print("ERROR")
 
@@ -113,22 +113,38 @@ def find_line_in_table(line, table, kLev):
     return "", []
 
 if __name__ == "__main__":
-    
-    first_file_name = "CS_Trans2_TEST_SP_1.xlsx"
+
+
+    first_file_name = "Milk_Shaker_V_25177_R1_BOM_20260213_1846_verified_2026_02_20.xlsx"
     first_file_count_column = "B"
-    first_file_pn_column = "D"
-    first_file_skip_row = 8
+    first_file_pn_column = "F"
+    first_file_skip_row = 0
+    first_file_mount = "H"
 
-    first_table = get_table(first_file_name, f"{first_file_count_column}, {first_file_pn_column}", first_file_skip_row, ["count", "pn"])
+    table = get_table(first_file_name, f"{first_file_count_column}, C, {first_file_pn_column}, {first_file_mount}, L", first_file_skip_row, ["count", "ref", "pn", "tm", "dpn"])
 
-    second_file_name = "CS_Trans2_TEST_SP_2.xlsx"
-    second_file_count_column = "B"
-    second_file_pn_column = "D"
-    second_file_skip_row = 8
+    if 0:
+        table = table[table['tm'] != 'DNP']
+        table = table[table['tm'] != 'NM']
 
-    second_table = get_table(second_file_name, f"{second_file_count_column}, {second_file_pn_column}", second_file_skip_row, ["count", "pn"])
+    print(table)
 
-    compare(first_table, second_table)
+    
+    # first_file_name = "CS_Trans2_TEST_SP_1.xlsx"
+    # first_file_count_column = "B"
+    # first_file_pn_column = "D"
+    # first_file_skip_row = 8
+
+    # first_table = get_table(first_file_name, f"{first_file_count_column}, {first_file_pn_column}", first_file_skip_row, ["count", "pn"])
+
+    # second_file_name = "CS_Trans2_TEST_SP_2.xlsx"
+    # second_file_count_column = "B"
+    # second_file_pn_column = "D"
+    # second_file_skip_row = 8
+
+    # second_table = get_table(second_file_name, f"{second_file_count_column}, {second_file_pn_column}", second_file_skip_row, ["count", "pn"])
+
+    # compare(first_table, second_table)
 
     # options_list = options()
     # options_list.add_option(first_file_column)
