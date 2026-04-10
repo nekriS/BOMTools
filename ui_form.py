@@ -376,17 +376,6 @@ class Ui_MainWindow(object):
 
         self.gridLayout_7.addWidget(self.second_count, 1, 1, 1, 1)
 
-        self.label_11 = QLabel(self.gridLayoutWidget_5)
-        self.label_11.setObjectName(u"label_11")
-        self.label_11.setMinimumSize(QSize(176, 0))
-        self.label_11.setMaximumSize(QSize(176, 16777215))
-
-        self.gridLayout_7.addWidget(self.label_11, 0, 2, 1, 1)
-
-        self.horizontalSpacer_2 = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
-
-        self.gridLayout_7.addItem(self.horizontalSpacer_2, 0, 3, 1, 1)
-
         self.second_skip = QSpinBox(self.gridLayoutWidget_5)
         self.second_skip.setObjectName(u"second_skip")
         self.second_skip.setMinimumSize(QSize(176, 30))
@@ -404,6 +393,20 @@ class Ui_MainWindow(object):
 
         self.gridLayout_7.addWidget(self.second_skip, 1, 2, 1, 1)
 
+        self.label_15 = QLabel(self.gridLayoutWidget_5)
+        self.label_15.setObjectName(u"label_15")
+        self.label_15.setMinimumSize(QSize(176, 16))
+        self.label_15.setMaximumSize(QSize(176, 16))
+
+        self.gridLayout_7.addWidget(self.label_15, 0, 0, 1, 1)
+
+        self.label_11 = QLabel(self.gridLayoutWidget_5)
+        self.label_11.setObjectName(u"label_11")
+        self.label_11.setMinimumSize(QSize(176, 0))
+        self.label_11.setMaximumSize(QSize(176, 16777215))
+
+        self.gridLayout_7.addWidget(self.label_11, 0, 2, 1, 1)
+
         self.second_pn = QLineEdit(self.gridLayoutWidget_5)
         self.second_pn.setObjectName(u"second_pn")
         self.second_pn.setMinimumSize(QSize(176, 30))
@@ -417,12 +420,31 @@ class Ui_MainWindow(object):
 
         self.gridLayout_7.addWidget(self.second_pn, 1, 0, 1, 1)
 
-        self.label_15 = QLabel(self.gridLayoutWidget_5)
-        self.label_15.setObjectName(u"label_15")
-        self.label_15.setMinimumSize(QSize(176, 16))
-        self.label_15.setMaximumSize(QSize(176, 16))
+        self.horizontalSpacer_2 = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
 
-        self.gridLayout_7.addWidget(self.label_15, 0, 0, 1, 1)
+        self.gridLayout_7.addItem(self.horizontalSpacer_2, 0, 4, 1, 1)
+
+        self.label_16 = QLabel(self.gridLayoutWidget_5)
+        self.label_16.setObjectName(u"label_16")
+        self.label_16.setMinimumSize(QSize(176, 0))
+        self.label_16.setMaximumSize(QSize(176, 16777215))
+
+        self.gridLayout_7.addWidget(self.label_16, 0, 3, 1, 1)
+
+        self.koef = QLineEdit(self.gridLayoutWidget_5)
+        self.koef.setObjectName(u"koef")
+        self.koef.setMinimumSize(QSize(176, 30))
+        self.koef.setMaximumSize(QSize(176, 30))
+        self.koef.setStyleSheet(u"\n"
+"	border: 1px solid #CCCCCC;\n"
+"	padding: -2px 10px;\n"
+"	font-size: 14px;\n"
+"	border-radius: 5px;\n"
+"")
+        self.koef.setFrame(True)
+        self.koef.setClearButtonEnabled(False)
+
+        self.gridLayout_7.addWidget(self.koef, 1, 3, 1, 1)
 
 
         self.gridLayout_5.addWidget(self.groupBox_3, 2, 0, 1, 3)
@@ -573,7 +595,7 @@ class Ui_MainWindow(object):
 
         self.retranslateUi(MainWindow)
 
-        self.tabWidget.setCurrentIndex(1)
+        self.tabWidget.setCurrentIndex(0)
         self.toolBox.setCurrentIndex(0)
         self.toolBox.layout().setSpacing(4)
 
@@ -607,9 +629,11 @@ class Ui_MainWindow(object):
         self.groupBox_3.setTitle(QCoreApplication.translate("MainWindow", u"\u041d\u0430\u0441\u0442\u0440\u043e\u0439\u043a\u0438", None))
         self.label_12.setText(QCoreApplication.translate("MainWindow", u" \u0421\u0442\u043e\u043b\u0431\u0435\u0446 \u043a\u043e\u043b\u0438\u0447\u0435\u0441\u0442\u0432\u0430:", None))
         self.second_count.setText(QCoreApplication.translate("MainWindow", u"B", None))
+        self.label_15.setText(QCoreApplication.translate("MainWindow", u" \u0421\u0442\u043e\u043b\u0431\u0435\u0446 \u043d\u043e\u043c\u0435\u043d\u043a\u043b\u0430\u0442\u0443\u0440\u044b:", None))
         self.label_11.setText(QCoreApplication.translate("MainWindow", u" \u041f\u0440\u043e\u043f\u0443\u0441\u0442\u0438\u0442\u044c \u0441\u0442\u0440\u043e\u043a:", None))
         self.second_pn.setText(QCoreApplication.translate("MainWindow", u"D", None))
-        self.label_15.setText(QCoreApplication.translate("MainWindow", u" \u0421\u0442\u043e\u043b\u0431\u0435\u0446 \u043d\u043e\u043c\u0435\u043d\u043a\u043b\u0430\u0442\u0443\u0440\u044b:", None))
+        self.label_16.setText(QCoreApplication.translate("MainWindow", u"\u041a. \u041b\u0435\u0432\u0435\u043d\u0448\u0442\u0435\u0439\u043d\u0430:", None))
+        self.koef.setText(QCoreApplication.translate("MainWindow", u"0.9", None))
         self.compareButton.setText(QCoreApplication.translate("MainWindow", u"\u0421\u0440\u0430\u0432\u043d\u0438\u0442\u044c", None))
         self.label_13.setText(QCoreApplication.translate("MainWindow", u" \u0420\u0435\u0437\u0443\u043b\u044c\u0442\u0430\u0442\u044b:", None))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.compare), QCoreApplication.translate("MainWindow", u"\u0421\u0440\u0430\u0432\u043d\u0435\u043d\u0438\u0435", None))

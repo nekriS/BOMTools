@@ -24,7 +24,7 @@ def get_table(file_name, column, skip_row, columns_name=[]):
     except:
         print("ERROR")
 
-def compare(first_table, second_table):
+def compare(first_table, second_table, kLev):
 
     common = pd.merge(first_table, second_table, how='inner')
     #print(common)
@@ -50,7 +50,7 @@ def compare(first_table, second_table):
         row_count = row[column_names[0]]
         row_pn = row[column_names[1]]
 
-        [status, target] = find_line_in_table([row_count, row_pn], only_second)
+        [status, target] = find_line_in_table([row_count, row_pn], only_second, kLev)
         match status:
             case "quantity changed":
                 quantity_changed.append([row_count, row_pn, target[0], target[1]])
@@ -73,19 +73,19 @@ def compare(first_table, second_table):
 
     return [common, df_quantity_changed, df_spelling_changed, df_q_s_changed, add_first, add_second]
 
-def compare_the_lines(str1, str2):
+def compare_the_lines(str1, str2, kLev):
 
     Levenshtein_c = 1 - Levenshtein.distance(str1, str2) / max(len(str1), len(str2))
     
     if str1 == str2:
         return 'equal'
-    elif Levenshtein_c >= 0.9:
+    elif Levenshtein_c >= kLev:
         return 'similar'
     else:
         return 'not equal'
     
 
-def find_line_in_table(line, table):
+def find_line_in_table(line, table, kLev):
 
     columns = table.columns
 
@@ -96,7 +96,7 @@ def find_line_in_table(line, table):
         row_count = row[columns[0]]
         row_pn = row[columns[1]]
 
-        match compare_the_lines(line_pn, row_pn):
+        match compare_the_lines(line_pn, row_pn, kLev):
             case 'equal':
                 if row_count != line_count:
                     return 'quantity changed', [row_count, row_pn]

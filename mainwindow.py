@@ -175,7 +175,9 @@ class MainWindow(QMainWindow):
 
         second_table = get_table(second_file_name, f"{second_file_count_column}, {second_file_pn_column}", second_file_skip_row, ["count", "pn"])
 
-        dfs = compare(first_table, second_table)
+        kLevenshtein = float(self.ui.koef.text())
+
+        dfs = compare(first_table, second_table, kLevenshtein)
 
         #print(dfs)
 
