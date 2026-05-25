@@ -1,4 +1,4 @@
-VERSION = "0.0.3"
+VERSION = "0.0.3.001"
 DATE = "10.04.2026"
 
 # This Python file uses the following encoding: utf-8
@@ -160,8 +160,11 @@ class MainWindow(QMainWindow):
                 border: 1px solid #cccccc;
             }
         """)
+        tableView.doItemsLayout()
         header = tableView.horizontalHeader()
         header.setSectionResizeMode(QHeaderView.Stretch)
+        header.setVisible(True)
+        header.setSectionResizeMode(QHeaderView.Interactive)
         header.setSectionsMovable(True)
         #tableView.resizeColumnsToContents()
 

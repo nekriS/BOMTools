@@ -1,6 +1,8 @@
 import Levenshtein
 import pandas as pd
 
+LETTERS = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U"]
+
 class options():
     def __init__(self):
         pass
@@ -17,12 +19,21 @@ def get_var_name(var):
 def get_table(file_name, column, skip_row, columns_name=[]):
 
     try:
-        table = pd.read_excel(file_name, usecols=f"{column}", skiprows=skip_row)
+        preview = pd.read_excel(file_name, nrows=1, skiprows=skip_row)
+        column_ = ""
+        for let in column.replace(" ", "").split(","):
+            if let in LETTERS[:len(preview.columns)]:
+                column_ += f"{let}, "
+    except:
+        print("get_table ERROR: CODE 1")
+        
+    try:
+        table = pd.read_excel(file_name, usecols=f"{column_[:-1]}", skiprows=skip_row)
         if columns_name != []:
-            table.columns = columns_name
+            table.columns = columns_name[:len(table.columns)]
         return table.dropna(subset=["pn"])
     except:
-        print("ERROR")
+        print("get_table ERROR: CODE 2")
 
 def compare(first_table, second_table, kLev):
 
@@ -115,13 +126,19 @@ def find_line_in_table(line, table, kLev):
 if __name__ == "__main__":
 
 
-    first_file_name = "Milk_Shaker_V_25177_R1_BOM_20260213_1846_verified_2026_02_20.xlsx"
+    first_file_name = "MILK_SHAKER_V_25177_R1_SP.xlsx"
     first_file_count_column = "B"
     first_file_pn_column = "F"
-    first_file_skip_row = 0
+    first_file_skip_row = 8
     first_file_mount = "H"
 
     table = get_table(first_file_name, f"{first_file_count_column}, C, {first_file_pn_column}, {first_file_mount}, L", first_file_skip_row, ["count", "ref", "pn", "tm", "dpn"])
+
+
+    #table = pd.read_excel(first_file_name, usecols=f"{first_file_count_column}, L", skiprows=skip_row)
+
+
+    print(table)
 
     if 0:
         table = table[table['tm'] != 'DNP']
