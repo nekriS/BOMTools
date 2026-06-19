@@ -93,6 +93,7 @@ class MainWindow(QMainWindow):
         self.ui.groupBox.setLayout(self.ui.gridLayout_4)
         self.ui.compare.setLayout(self.ui.gridLayout_5)
         self.ui.optimization.setLayout(self.ui.gridLayout_2)
+        self.ui.pnp.setLayout(self.ui.gridLayout_9)    
 
         self.ui.compareButton.clicked.connect(self.compareButton_clicked)
         self.ui.optimizeButton.clicked.connect(self.optimizeButton_clicked)

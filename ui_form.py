@@ -3,7 +3,7 @@
 ################################################################################
 ## Form generated from reading UI file 'form.ui'
 ##
-## Created by: Qt User Interface Compiler version 6.11.1
+## Created by: Qt User Interface Compiler version 6.10.2
 ##
 ## WARNING! All changes made in this file will be lost when recompiling UI file!
 ################################################################################
@@ -56,7 +56,7 @@ class Ui_MainWindow(object):
         self.gridLayoutWidget_2.setGeometry(QRect(10, 20, 1051, 160))
         self.gridLayout_4 = QGridLayout(self.gridLayoutWidget_2)
         self.gridLayout_4.setObjectName(u"gridLayout_4")
-        self.gridLayout_4.setSizeConstraint(QLayout.SetMinimumSize)
+        self.gridLayout_4.setSizeConstraint(QLayout.SizeConstraint.SetMinimumSize)
         self.gridLayout_4.setContentsMargins(6, 6, 6, 6)
         self.label_3 = QLabel(self.gridLayoutWidget_2)
         self.label_3.setObjectName(u"label_3")
@@ -244,8 +244,8 @@ class Ui_MainWindow(object):
 
         self.tabWidget = QTabWidget(self.gridLayoutWidget)
         self.tabWidget.setObjectName(u"tabWidget")
-        self.tabWidget.setTabPosition(QTabWidget.North)
-        self.tabWidget.setTabShape(QTabWidget.Rounded)
+        self.tabWidget.setTabPosition(QTabWidget.TabPosition.North)
+        self.tabWidget.setTabShape(QTabWidget.TabShape.Rounded)
         self.compare = QWidget()
         self.compare.setObjectName(u"compare")
         self.gridLayoutWidget_3 = QWidget(self.compare)
@@ -253,7 +253,7 @@ class Ui_MainWindow(object):
         self.gridLayoutWidget_3.setGeometry(QRect(10, 10, 1061, 510))
         self.gridLayout_5 = QGridLayout(self.gridLayoutWidget_3)
         self.gridLayout_5.setObjectName(u"gridLayout_5")
-        self.gridLayout_5.setSizeConstraint(QLayout.SetMinimumSize)
+        self.gridLayout_5.setSizeConstraint(QLayout.SizeConstraint.SetMinimumSize)
         self.gridLayout_5.setContentsMargins(6, 6, 6, 6)
         self.toolBox = QToolBox(self.gridLayoutWidget_3)
         self.toolBox.setObjectName(u"toolBox")
@@ -264,9 +264,9 @@ class Ui_MainWindow(object):
         font1.setHintingPreference(QFont.PreferDefaultHinting)
         self.toolBox.setFont(font1)
         self.toolBox.setTabletTracking(False)
-        self.toolBox.setFocusPolicy(Qt.NoFocus)
+        self.toolBox.setFocusPolicy(Qt.FocusPolicy.NoFocus)
         self.toolBox.setAcceptDrops(False)
-        self.toolBox.setLayoutDirection(Qt.LeftToRight)
+        self.toolBox.setLayoutDirection(Qt.LayoutDirection.LeftToRight)
         self.toolBox.setAutoFillBackground(False)
         self.toolBox.setStyleSheet(u"QToolBox::tab {\n"
 "                            background-color: #f5f5f5;\n"
@@ -287,8 +287,8 @@ class Ui_MainWindow(object):
 "                            border: 1px solid #3399FF;\n"
 "                            color: white;\n"
 "                        }")
-        self.toolBox.setFrameShape(QFrame.NoFrame)
-        self.toolBox.setFrameShadow(QFrame.Plain)
+        self.toolBox.setFrameShape(QFrame.Shape.NoFrame)
+        self.toolBox.setFrameShadow(QFrame.Shadow.Plain)
         self.toolBox.setLineWidth(1)
         self.toolBox.setMidLineWidth(0)
         self.page = QWidget()
@@ -651,7 +651,7 @@ class Ui_MainWindow(object):
         self.tableView = QTableView(self.gridLayoutWidget_6)
         self.tableView.setObjectName(u"tableView")
         self.tableView.setDragEnabled(False)
-        self.tableView.setSelectionBehavior(QAbstractItemView.SelectRows)
+        self.tableView.setSelectionBehavior(QAbstractItemView.SelectionBehavior.SelectRows)
         self.tableView.setSortingEnabled(True)
         self.tableView.horizontalHeader().setCascadingSectionResizes(False)
         self.tableView.horizontalHeader().setStretchLastSection(False)
@@ -663,10 +663,10 @@ class Ui_MainWindow(object):
         self.pnp.setObjectName(u"pnp")
         self.gridLayoutWidget_8 = QWidget(self.pnp)
         self.gridLayoutWidget_8.setObjectName(u"gridLayoutWidget_8")
-        self.gridLayoutWidget_8.setGeometry(QRect(0, 0, 1061, 510))
+        self.gridLayoutWidget_8.setGeometry(QRect(0, 0, 1001, 510))
         self.gridLayout_9 = QGridLayout(self.gridLayoutWidget_8)
         self.gridLayout_9.setObjectName(u"gridLayout_9")
-        self.gridLayout_9.setSizeConstraint(QLayout.SetMinimumSize)
+        self.gridLayout_9.setSizeConstraint(QLayout.SizeConstraint.SetMinimumSize)
         self.gridLayout_9.setContentsMargins(6, 6, 6, 6)
         self.cord_path = QLineEdit(self.gridLayoutWidget_8)
         self.cord_path.setObjectName(u"cord_path")
@@ -723,6 +723,47 @@ class Ui_MainWindow(object):
         self.label_21.setObjectName(u"label_21")
 
         self.gridLayout_9.addWidget(self.label_21, 0, 2, 1, 1)
+
+        self.label_26 = QLabel(self.gridLayoutWidget_8)
+        self.label_26.setObjectName(u"label_26")
+
+        self.gridLayout_9.addWidget(self.label_26, 0, 1, 1, 1)
+
+        self.label_24 = QLabel(self.gridLayoutWidget_8)
+        self.label_24.setObjectName(u"label_24")
+        self.label_24.setMinimumSize(QSize(278, 0))
+        self.label_24.setMaximumSize(QSize(278, 16777215))
+        self.label_24.setStyleSheet(u"\n"
+"	font-size: 14px;\n"
+"")
+
+        self.gridLayout_9.addWidget(self.label_24, 1, 2, 1, 1)
+
+        self.runPnP = QPushButton(self.gridLayoutWidget_8)
+        self.runPnP.setObjectName(u"runPnP")
+        self.runPnP.setMinimumSize(QSize(0, 30))
+        self.runPnP.setStyleSheet(u"QPushButton {\n"
+"	background-color: #EBEBEB;\n"
+"	border: 1px solid #CCCCCC;\n"
+"	padding: -2px 10px;\n"
+"	font-size: 14px;\n"
+"	border-radius: 5px;\n"
+"	margin: 0px;\n"
+"}\n"
+"\n"
+"QPushButton:hover {\n"
+"	background-color: #f5f5f5;\n"
+"border: 1px solid #f5f5f5;\n"
+"	color: black;\n"
+"}\n"
+"\n"
+"QPushButton:pressed {\n"
+"	background-color: #3399FF;\n"
+"	border: 1px solid #3399FF;\n"
+"	color: white;\n"
+"}")
+
+        self.gridLayout_9.addWidget(self.runPnP, 3, 0, 1, 1)
 
         self.groupBox_5 = QGroupBox(self.gridLayoutWidget_8)
         self.groupBox_5.setObjectName(u"groupBox_5")
@@ -799,47 +840,6 @@ class Ui_MainWindow(object):
 
 
         self.gridLayout_9.addWidget(self.groupBox_5, 2, 0, 1, 3)
-
-        self.label_26 = QLabel(self.gridLayoutWidget_8)
-        self.label_26.setObjectName(u"label_26")
-
-        self.gridLayout_9.addWidget(self.label_26, 0, 1, 1, 1)
-
-        self.label_24 = QLabel(self.gridLayoutWidget_8)
-        self.label_24.setObjectName(u"label_24")
-        self.label_24.setMinimumSize(QSize(278, 0))
-        self.label_24.setMaximumSize(QSize(278, 16777215))
-        self.label_24.setStyleSheet(u"\n"
-"	font-size: 14px;\n"
-"")
-
-        self.gridLayout_9.addWidget(self.label_24, 1, 2, 1, 1)
-
-        self.runPnP = QPushButton(self.gridLayoutWidget_8)
-        self.runPnP.setObjectName(u"runPnP")
-        self.runPnP.setMinimumSize(QSize(0, 30))
-        self.runPnP.setStyleSheet(u"QPushButton {\n"
-"	background-color: #EBEBEB;\n"
-"	border: 1px solid #CCCCCC;\n"
-"	padding: -2px 10px;\n"
-"	font-size: 14px;\n"
-"	border-radius: 5px;\n"
-"	margin: 0px;\n"
-"}\n"
-"\n"
-"QPushButton:hover {\n"
-"	background-color: #f5f5f5;\n"
-"border: 1px solid #f5f5f5;\n"
-"	color: black;\n"
-"}\n"
-"\n"
-"QPushButton:pressed {\n"
-"	background-color: #3399FF;\n"
-"	border: 1px solid #3399FF;\n"
-"	color: white;\n"
-"}")
-
-        self.gridLayout_9.addWidget(self.runPnP, 3, 0, 1, 1)
 
         self.tabWidget.addTab(self.pnp, "")
 
@@ -920,6 +920,9 @@ class Ui_MainWindow(object):
         self.open_cord.setText(QCoreApplication.translate("MainWindow", u"\u041e\u0442\u043a\u0440\u044b\u0442\u044c", None))
         self.label_22.setText(QCoreApplication.translate("MainWindow", u"\u0424\u0430\u0439\u043b \u0441 \u043a\u043e\u043e\u0440\u0434\u0438\u043d\u0430\u0442\u0430\u043c\u0438:", None))
         self.label_21.setText(QCoreApplication.translate("MainWindow", u" \u0414\u0430\u0442\u0430 \u0440\u0435\u0434\u0430\u043a\u0442\u0438\u0440\u043e\u0432\u0430\u043d\u0438\u044f:", None))
+        self.label_26.setText(QCoreApplication.translate("MainWindow", u" \u0424\u0430\u0439\u043b:", None))
+        self.label_24.setText(QCoreApplication.translate("MainWindow", u"\u0424\u0430\u0439\u043b \u043d\u0435 \u043e\u0442\u043a\u0440\u044b\u0442", None))
+        self.runPnP.setText(QCoreApplication.translate("MainWindow", u"\u0421\u0433\u0435\u043d\u0435\u0440\u0438\u0440\u043e\u0432\u0430\u0442\u044c", None))
         self.groupBox_5.setTitle(QCoreApplication.translate("MainWindow", u"\u041d\u0430\u0441\u0442\u0440\u043e\u0439\u043a\u0438", None))
         self.exceptHAND.setText(QCoreApplication.translate("MainWindow", u"\u0418\u0441\u043a\u043b\u044e\u0447\u0438\u0442\u044c HAND", None))
         self.typeInputPnp.setItemText(0, QCoreApplication.translate("MainWindow", u"\u0424\u0430\u0439\u043b place (Allegro)", None))
@@ -932,9 +935,6 @@ class Ui_MainWindow(object):
         self.label_28.setText(QCoreApplication.translate("MainWindow", u"\u0422\u0438\u043f \u0432\u0445\u043e\u0434\u043d\u043e\u0433\u043e \u0444\u0430\u0439\u043b\u0430:", None))
         self.label_27.setText(QCoreApplication.translate("MainWindow", u"\u0422\u0438\u043f \u0432\u044b\u0445\u043e\u0434\u043d\u043e\u0433\u043e \u0444\u0430\u0439\u043b\u0430:", None))
         self.openPnp.setText(QCoreApplication.translate("MainWindow", u"\u041e\u0442\u043a\u0440\u044b\u0442\u044c \u0444\u0430\u0439\u043b \u043f\u043e\u0441\u043b\u0435 \u0433\u0435\u043d\u0435\u0440\u0430\u0446\u0438\u0438", None))
-        self.label_26.setText(QCoreApplication.translate("MainWindow", u" \u0424\u0430\u0439\u043b:", None))
-        self.label_24.setText(QCoreApplication.translate("MainWindow", u"\u0424\u0430\u0439\u043b \u043d\u0435 \u043e\u0442\u043a\u0440\u044b\u0442", None))
-        self.runPnP.setText(QCoreApplication.translate("MainWindow", u"\u0421\u0433\u0435\u043d\u0435\u0440\u0438\u0440\u043e\u0432\u0430\u0442\u044c", None))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.pnp), QCoreApplication.translate("MainWindow", u"\u0413\u0435\u043d\u0435\u0440\u0430\u0446\u0438\u044f PnP", None))
         self.menu.setTitle(QCoreApplication.translate("MainWindow", u"\u0421\u043f\u0440\u0430\u0432\u043a\u0430", None))
     # retranslateUi
