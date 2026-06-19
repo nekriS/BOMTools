@@ -1,5 +1,5 @@
-VERSION = "0.0.3.002"
-DATE = "10.04.2026"
+VERSION = "0.0.4.000-SNAPSHOT"
+DATE = "09.06.2026"
 
 # This Python file uses the following encoding: utf-8
 import sys
@@ -7,6 +7,7 @@ import sys
 from PySide6.QtWidgets import QApplication, QMainWindow, QFrame, QMessageBox, QFileDialog
 from compare.tools import compare, get_table
 from optimize.tools import getTableByRequest, is_number
+from pnp.tools import generatePnp
 
 # Important:
 # You need to run the following command to generate the ui_form.py file
@@ -103,6 +104,47 @@ class MainWindow(QMainWindow):
 
         self.ui.action.triggered.connect(self.show_about_dialog)
 
+        self.ui.runPnP.clicked.connect(self.runPnp_clicked)
+        self.ui.open_cord.clicked.connect(self.open_cord_clicked)
+
+        self.ui.action.triggered.connect(self.show_about_dialog)
+
+
+
+    def runPnp_clicked(self):
+        print(1)
+        pass
+
+        first_file_name = self.ui.first_file.text()
+        first_file_count_column = self.ui.first_count.text()
+        first_file_pn_column = self.ui.first_pn.text()
+        first_file_skip_row = int(self.ui.first_skip.text())
+        first_file_mount = self.ui.firstMount.text()
+
+        table = get_table(first_file_name, f"{first_file_count_column}, C, {first_file_pn_column}, {first_file_mount}, L", first_file_skip_row, ["count", "ref", "pn", "tm", "dpn"])
+
+        print(table)
+        if self.ui.exceptDNP.isChecked():
+            table = table[table['tm'] != 'DNP']
+            table = table[table['tm'] != 'NM']
+            table = table[table['tm'] != 'NOT MOUNT']
+
+        if self.ui.exceptHAND.isChecked():
+            table = table[table['tm'] != 'HAND']
+
+        type_file_name = self.ui.cord_path.text()
+
+        
+
+        inputType = self.ui.typeInputPnp.currentText()
+        outputType = self.ui.typeOutputPnp.currentText()
+
+        output_file_name = first_file_name[:first_file_name.find(".")]
+        if "_SP" in output_file_name:
+            output_file_name = output_file_name[:output_file_name.find("_SP")]
+
+        generatePnp(table, type_file_name, inputType, outputType, f"{output_file_name}", self.ui.exceptPrefix.isChecked(), self.ui.openPnp.isChecked())
+
 
     def copyResultButton_clicked(self):
         pyperclip.copy(self.ui.resultText.toPlainText())
@@ -120,6 +162,7 @@ class MainWindow(QMainWindow):
         if self.ui.exceptDNP.isChecked():
             table = table[table['tm'] != 'DNP']
             table = table[table['tm'] != 'NM']
+            table = table[table['tm'] != 'NOT MOUNT']
 
         print(table)
 
@@ -192,8 +235,10 @@ class MainWindow(QMainWindow):
         if self.ui.exceptDNP.isChecked():
             first_table = first_table[first_table['tm'] != 'DNP']
             first_table = first_table[first_table['tm'] != 'NM']
+            first_table = first_table[first_table['tm'] != 'NOT MOUN']
             second_table = second_table[second_table['tm'] != 'DNP']
             second_table = second_table[second_table['tm'] != 'NM']
+            second_table = second_table[second_table['tm'] != 'NOT MOUN']
 
         first_table = first_table.drop(['tm'], axis=1)
         second_table = second_table.drop(['tm'], axis=1)
@@ -332,6 +377,12 @@ class MainWindow(QMainWindow):
 
         """)
 
+
+    def open_cord_clicked(self):
+        file_path = self.open_file_dialog()
+        temp_time = self.get_time_modification(file_path)
+        self.ui.cord_path.setText(f"{file_path}")
+        self.ui.label_24.setText(f"{temp_time}")
 
     def open_first_clicked(self):
 

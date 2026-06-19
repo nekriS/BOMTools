@@ -1,6 +1,11 @@
 # This file is used to ignore files which are generated
 # ----------------------------------------------------------------------------
 
+*.tsv
+test.py
+*.txt
+*.xls
+*.xlsx
 *.spec
 *~
 *.autosave
