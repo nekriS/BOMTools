@@ -31,6 +31,8 @@ class Ui_MainWindow(object):
         MainWindow.resize(1110, 832)
         self.action = QAction(MainWindow)
         self.action.setObjectName(u"action")
+        self.help = QAction(MainWindow)
+        self.help.setObjectName(u"help")
         self.centralwidget = QWidget(MainWindow)
         self.centralwidget.setObjectName(u"centralwidget")
         self.centralwidget.setEnabled(True)
@@ -860,6 +862,7 @@ class Ui_MainWindow(object):
 
         self.menubar.addAction(self.menu.menuAction())
         self.menu.addAction(self.action)
+        self.menu.addAction(self.help)
 
         self.retranslateUi(MainWindow)
 
@@ -874,6 +877,7 @@ class Ui_MainWindow(object):
     def retranslateUi(self, MainWindow):
         MainWindow.setWindowTitle(QCoreApplication.translate("MainWindow", u"MainWindow", None))
         self.action.setText(QCoreApplication.translate("MainWindow", u"\u041e \u043f\u0440\u043e\u0433\u0440\u0430\u043c\u043c\u0435", None))
+        self.help.setText(QCoreApplication.translate("MainWindow", u"\u0421\u043f\u0440\u0430\u0432\u043a\u0430", None))
         self.groupBox.setTitle(QCoreApplication.translate("MainWindow", u"\u0412\u0445\u043e\u0434\u043d\u043e\u0439 \u0444\u0430\u0439\u043b", None))
         self.label_3.setText(QCoreApplication.translate("MainWindow", u" \u0424\u0430\u0439\u043b:", None))
         self.first_file.setText("")

@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Справка по функционалу программы</title>
+    <style>
+        :root {
+            --dark-blue: #1e293b;
+            --gray-text: #334155;
+            --gray-light: #f8fafc;
+            --border-color: #cbd5e1;
+            --border-active: #0f172a;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+            font-size: 14px;
+            line-height: 1.5;
+            color: var(--gray-text);
+            background-color: #ffffff;
+            margin: 0;
+            padding: 24px;
+        }
+
+        .help-container {
+            max-width: 800px;
+            margin: 0 auto;
+            border: 1px solid var(--border-color);
+            background: #ffffff;
+        }
+
+        .help-header {
+            padding: 16px 20px;
+            background-color: var(--gray-light);
+            border-bottom: 1px solid var(--border-color);
+            margin: 0;
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--dark-blue);
+        }
+
+        /* Навигация вкладок */
+        .tabs-nav {
+            display: flex;
+            background-color: var(--gray-light);
+            border-bottom: 1px solid var(--border-color);
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+
+        .tab-btn {
+            padding: 10px 20px;
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--gray-text);
+            background: none;
+            border: none;
+            border-right: 1px solid var(--border-color);
+            border-bottom: 2px solid transparent;
+            cursor: pointer;
+            outline: none;
+            transition: background-color 0.15s ease;
+        }
+
+        .tab-btn:hover {
+            background-color: #f1f5f9;
+        }
+
+        .tab-btn.active {
+            background-color: #ffffff;
+            color: var(--dark-blue);
+            border-bottom-color: var(--border-active);
+            font-weight: 600;
+        }
+
+        /* Содержимое вкладок */
+        .tabs-content {
+            padding: 24px;
+        }
+
+        .tab-panel {
+            display: none;
+        }
+
+        .tab-panel.active {
+            display: block;
+        }
+
+        .tab-panel p {
+            margin-top: 0;
+            margin-bottom: 16px;
+            color: #475569;
+        }
+
+        /* Списки */
+        .feature-list {
+            margin: 0;
+            padding-left: 20px;
+        }
+
+        .feature-list li {
+            margin-bottom: 10px;
+        }
+
+        .feature-list li strong {
+            color: var(--dark-blue);
+        }
+
+        /* Информационный блок */
+        .info-note {
+            margin-top: 24px;
+            padding: 12px 16px;
+            background-color: var(--gray-light);
+            border-left: 3px solid var(--dark-blue);
+            font-size: 13px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="help-container">
+    <h1 class="help-header">Руководство пользователя</h1>
+    
+    <!-- Переключатели вкладок -->
+    <div class="tabs-nav" role="tablist">
+        <button class="tab-btn active" role="tab" aria-selected="false" aria-controls="panel-pnp" id="tab-pnp">Генерация PnP</button>
+    </div>
+
+    <!-- Контент -->
+    <div class="tabs-content">
+
+        <!-- Панель: Генерация Pnp -->
+        <div id="panel-pnp" class="tab-panel active" role="tabpanel" aria-labelledby="tab-pnp">
+            <p>Для того чтобы сгенерировать PnP (Pick and place) файл необходимо:</p>
+			<ol class="feature-list">
+				<li>Открыть вкладку <strong>"Генерация PnP"</strong></li>
+					<img src="images/pnp.png" alt="Скриншот pnp" width="100%" style="display: block; margin-bottom: 20px;">
+				<li>Открыть спецификацию в формате <strong>.xlsx</strong></li>
+					<img src="images/sp.png" alt="Скриншот sp" width="100%" style="display: block; margin-bottom: 20px;">
+				<li>Выбрать необходимые настроки (по умолчанию настройки подготовлены для стандартной спецификации)</li>
+					<img src="images/set.png" alt="Скриншот set" width="100%" style="display: block; margin-bottom: 20px;">
+					<div>Если в конечном файле нужно отображение компонентов <strong>DNP</strong>, необходимо снять соответствующий чек-бокс.</div><br>
+				<li>Открыть файл с координатами компонентов</li>
+					<img src="images/place.png" alt="Скриншот place" width="100%" style="display: block; margin-bottom: 20px;">
+					<div>Поддерживаются два типа файлов:</div>
+					<ul class="files">
+						<li>Файл place (выгружается из <strong>Allegro PCB</strong>)</li>
+						<img src="images/placePCB.png" alt="Скриншот placePCB" width="100%" style="display: block; margin-bottom: 20px;">
+						<li>Файл PnP формата SiDeCo c расширением <strong>.xls</strong></li>
+						<img src="images/placeSDC.png" alt="Скриншот placeSDC" width="100%" style="display: block; margin-bottom: 20px;">
+					</ul>
+				<li>Выбрать тип файла с координатами</li>
+					<img src="images/setInputType.png" alt="Скриншот setInputType" width="100%" style="display: block; margin-bottom: 20px;">
+				<li>Выбрать тип выходного файла</li>
+					<img src="images/setOutputType.png" alt="Скриншот setOutputType" width="100%" style="display: block; margin-bottom: 20px;">
+					<div>В данный момент поддерживается два типа выходного файла:</div>
+					<ul class="files">
+						<li>Стандартный файл</li>
+						<img src="images/default_PnP.png" alt="Скриншот default_PnP" width="100%" style="display: block; margin-bottom: 20px;">
+						<div>Соответствует последним утвержденным стандартам. Представляет собой текстовый файл.</div><br>
+						<li>Файл формата .xlsx с выделением типа монтажа цветом</li>
+						<img src="images/colorPnP.png" alt="Скриншот colorPnP" width="100%" style="display: block; margin-bottom: 20px;">
+						<div>Рекомендуется при заказе печатной платы в КНР.</div><br>
+					</ul>
+				<li>Выбрать необходимые настройки</li>
+					<img src="images/set2.png" alt="Скриншот set2" width="100%" style="display: block; margin-bottom: 20px;">
+					<div><strong>"Исключить HAND"</strong> - исключает из итогового файла ручной монтаж. <strong>"Исключить приставки"</strong> - исключает из итогового файла приставки типа "C-", "D-", "R-" и подобные.</div><br>
+				<li>Нажать кнопку </+strong>"Сгенерировать"</strong></li>
+					<img src="images/gen.png" alt="Скриншот gen" width="100%" style="display: block; margin-bottom: 20px;">
+					<div>Если чек-бокс "Открыть файл после генерации" активен, то отроется выходной файл, иначе он будет храниться в директории, где лежит файл спецификации.</div><br>
+			</ol>
+			<div><strong>Готово</strong></div>
+        </div>
+    </div>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const tabs = document.querySelectorAll('.tab-btn');
+        const panels = document.querySelectorAll('.tab-panel');
+
+        tabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                // Сброс активных классов с кнопок
+                tabs.forEach(t => {
+                    t.classList.remove('active');
+                    t.setAttribute('aria-selected', 'false');
+                });
+                
+                // Сброс активных классов с панелей
+                panels.forEach(p => p.classList.remove('active'));
+
+                // Активация выбранной кнопки
+                tab.classList.add('active');
+                tab.setAttribute('aria-selected', 'true');
+
+                // Отображение связанной панели
+                const targetPanelId = tab.getAttribute('aria-controls');
+                document.getElementById(targetPanelId).classList.add('active');
+            });
+        });
+    });
+</script>
+
+</body>
+</html>

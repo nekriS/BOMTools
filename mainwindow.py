@@ -1,11 +1,11 @@
 VERSION = "0.0.4"
-BUILD = "002"
+BUILD = "003"
 DATE = "19.06.2026"
 
 # This Python file uses the following encoding: utf-8
 import sys
 
-from PySide6.QtWidgets import QApplication, QMainWindow, QFrame, QMessageBox, QFileDialog
+from PySide6.QtWidgets import QApplication, QMainWindow, QFrame, QMessageBox, QFileDialog, QPushButton, QTextBrowser, QDialog
 from compare.tools import compare, get_table
 from optimize.tools import getTableByRequest, is_number
 from pnp.tools import generatePnp
@@ -21,14 +21,20 @@ from PySide6.QtWidgets import (
     QVBoxLayout, QWidget, QLabel, QHeaderView,QStyle
 )
 
-from PySide6.QtCore import QAbstractTableModel, Qt
+from PySide6.QtCore import QAbstractTableModel, Qt, QUrl
 from PySide6.QtGui import QColor, QIcon
 
 import pandas as pd
 from pathlib import Path
 from datetime import datetime
 import os
+
 import pyperclip
+
+from PySide6.QtWebEngineWidgets import QWebEngineView
+
+os.environ["QT_QUICK_BACKEND"] = "software"
+os.environ["QTWEBENGINE_DISABLE_GPU"] = "1"
 
 def resource_path(relative_path):
     if hasattr(sys, '_MEIPASS'):
@@ -80,6 +86,31 @@ class PandasModel(QAbstractTableModel):
 
         return None
 
+class HtmlHelpWindow(QDialog):
+    def __init__(self, file_path, parent=None):
+        super().__init__(parent)
+        self.setWindowTitle("Руководство пользователя")
+        self.resize(800, 600) # Увеличим размер для полноценного сайта
+        
+        layout = QVBoxLayout(self)
+        
+        # Вместо QTextBrowser создаем современный веб-браузер
+        self.web_view = QWebEngineView(self)
+        
+
+        if os.path.exists(file_path):
+            # Важно: для локальных файлов нужно использовать абсолютный путь и схему file:///
+            abs_path = os.path.abspath(file_path)
+            self.web_view.setUrl(QUrl.fromLocalFile(abs_path))
+        else:
+            self.web_view.setHtml(f"<h3 style='color:red;'>Файл не найден: {file_path}</h3>")
+            
+        layout.addWidget(self.web_view)
+        self.web_view.setLayout(layout)
+        #close_btn = QPushButton("Закрыть", self)
+        #close_btn.clicked.connect(self.accept)
+        #layout.addWidget(close_btn)
+
 class MainWindow(QMainWindow):
     def __init__(self, parent=None):
         super().__init__(parent)
@@ -107,12 +138,15 @@ class MainWindow(QMainWindow):
         self.ui.open_second.clicked.connect(self.open_second_clicked)
 
         self.ui.action.triggered.connect(self.show_about_dialog)
+        self.ui.help.triggered.connect(self.open_help)
 
         self.ui.runPnP.clicked.connect(self.runPnp_clicked)
         self.ui.open_cord.clicked.connect(self.open_cord_clicked)
 
 
-
+    def open_help(self):
+        self.help_window = HtmlHelpWindow("help/help.html", self)
+        self.help_window.show()
 
 
     def runPnp_clicked(self):
