@@ -1,5 +1,6 @@
 import Levenshtein
 import pandas as pd
+from system import log
 
 LETTERS = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U"]
 
@@ -24,16 +25,14 @@ def get_table(file_name, column, skip_row, columns_name=[]):
         for let in column.replace(" ", "").split(","):
             if let in LETTERS[:len(preview.columns)]:
                 column_ += f"{let}, "
-    except:
-        print("get_table ERROR: CODE 1")
-        
-    try:
+
         table = pd.read_excel(file_name, usecols=f"{column_[:-1]}", skiprows=skip_row)
         if columns_name != []:
             table.columns = columns_name[:len(table.columns)]
         return table.dropna(subset=["pn"])
-    except:
-        print("get_table ERROR: CODE 2")
+    except Exception as e:
+        log(f"Неизвестная ошибка: {e}\nКонтекст: reading specification file")
+        raise
 
 def compare(first_table, second_table, kLev):
 
@@ -45,8 +44,8 @@ def compare(first_table, second_table, kLev):
     only_first = merged[merged['_merge'] == 'left_only'].drop('_merge', axis=1)
     only_second = merged[merged['_merge'] == 'right_only'].drop('_merge', axis=1)
                       
-    print(only_first)
-    print(only_second)
+    #print(only_first)
+    #print(only_second)
 
     quantity_changed = []
     spelling_changed = []
@@ -79,8 +78,8 @@ def compare(first_table, second_table, kLev):
     df_quantity_changed = pd.DataFrame(quantity_changed, columns=column_names.to_list()*2)
     df_spelling_changed = pd.DataFrame(spelling_changed, columns=column_names.to_list()*2)
     df_q_s_changed = pd.DataFrame(q_s_changed, columns=column_names.to_list()*2)
-    print(add_first)
-    print(add_second)
+    #print(add_first)
+    #print(add_second)
 
     return [common, df_quantity_changed, df_spelling_changed, df_q_s_changed, add_first, add_second]
 
@@ -119,7 +118,7 @@ def find_line_in_table(line, table, kLev):
             case _:
                 continue
 
-        print(row_count, row_pn)
+        #print(row_count, row_pn)
 
     return "", []
 

@@ -2,6 +2,7 @@ import pandas as pd
 import os
 import openpyxl as oxl
 from openpyxl.styles import PatternFill, Alignment, Border, Side, Font
+from system import log
 
 PREFIXIES = ["C", "R", "D", "F", "X", "S", "Q", "VT", "VD"]
 
@@ -35,103 +36,120 @@ def get_max_split(line: str, references):
             max = len(line.split(ref))
     return result
 
-def checkPrefix(partnumber, exceptPrefix):
+def checkPrefix(partnumber: str, exceptPrefix: bool):
     pos = partnumber.find("-")
     if pos != -1:
         if exceptPrefix and (partnumber[0:pos+1] in [s + "-" for s in PREFIXIES]):
-            return partnumber[pos+1:]
+            return partnumber[pos+1:].strip()
         else:
-            return partnumber
+            return partnumber.strip()
     else:
         return partnumber
 
-def is_number(s):
+def is_number(s: str):
+    """
+    Проверяет, является ли строка числом типа int
+    """
     try:
         int(s)
         return True
     except ValueError:
         return False
 
-def findNumber(line):
-    print(line)
-
+def findNumber(line: str):
+    """
+    Ищет целое число в строке
+    """
     for i in range(0,len(line)):
         for j in range(len(line), 0, -1):
             if is_number(line[i:j]):
                 return(str(line[:i]), int(line[i:j]))
     return -1
 
-def generatePnp(table, type_file_name, inputType, outputType, outputName, exceptPrefix, openFile=True):
+def generatePnp(table: pd.Dataframe, type_file_name, inputType, outputType, outputName, exceptPrefix, openFile=True):
     
     file = ""
     components = {}
     hand = []
     dnp = []
+    try:
+        for index, row in table.iterrows():
+            if row['ref'] != "PCB":
+                references = get_max_split(row['ref'], [",", " "])
+                references_flat = []
 
-    for index, row in table.iterrows():
-        if row['ref'] != "PCB":
-            references = get_max_split(row['ref'], [",", " "])
-            references_flat = []
+                for ref in references:
+                    if "-" in ref:
+                        r, startr = findNumber(ref[:ref.find("-")])
+                        r_, endr = findNumber(ref[ref.find("-")+1:])
+                        
+                        for r_n in range(startr, endr+1):
+                            references_flat.append(f"{r}{r_n}")
+                    else:
+                        references_flat.append(ref)
 
-            for ref in references:
-                if "-" in ref:
-                    r, startr = findNumber(ref[:ref.find("-")])
-                    r_, endr = findNumber(ref[ref.find("-")+1:])
+                for ref_flat in references_flat:
+                    partNumber = str(row["pn"])
+                    partNumber = checkPrefix(partNumber, exceptPrefix)
+                    components[ref_flat] = partNumber
+                    if row['tm'] == 'HAND':
+                        hand.append(ref_flat)
+                    elif row['tm'] == 'NM' or row['tm'] == 'DNP' or row['tm'] == 'NOT MOUNT':
+                        dnp.append(ref_flat)
+    except Exception as e:
+        log(f"Неизвестная ошибка: {e}\nКонтекст: specification file")
+        raise
+    try:
+        match inputType:
+            case "Файл place (Allegro)":
+                place = pd.read_table(type_file_name, skiprows=1, header=None, encoding='windows-1251')
+                place = place.sort_values(by=0)
+
+                output = []
+
+                for index, row in place.iterrows():
+                    line = row.values[0]
+                    split_line = line.split()
+                    ref = split_line[0]
+                    #partNumber = checkPrefix(partNumber, exceptPrefix)
+                    if ref in components.keys():
+                        if len(split_line) == 5:
+                            output.append([ref, components[ref], "TopLayer", split_line[1], split_line[2], split_line[3]])
+                        else:
+                            output.append([ref, components[ref], "BottomLayer", split_line[1], split_line[2], split_line[3]])
                     
-                    for r_n in range(startr, endr+1):
-                        references_flat.append(f"{r}{r_n}")
-                else:
-                    references_flat.append(ref)
+                output_df = pd.DataFrame(output)
 
-            for ref_flat in references_flat:
-                partNumber = row["pn"]
-                partNumber = checkPrefix(partNumber, exceptPrefix)
-                components[ref_flat] = partNumber
-                if row['tm'] == 'HAND':
-                    hand.append(ref_flat)
-                elif row['tm'] == 'NM' or row['tm'] == 'DNP' or row['tm'] == 'NOT MOUNT':
-                    dnp.append(ref_flat)
-    print(components)
-
-    match inputType:
-        case "Файл place (Allegro)":
-            place = pd.read_table(type_file_name, skiprows=1, header=None, encoding='windows-1251')
-            place = place.sort_values(by=0)
-
-            output = []
-
-            for index, row in place.iterrows():
-                line = row.values[0]
-                split_line = line.split()
-                ref = split_line[0]
-                #partNumber = checkPrefix(partNumber, exceptPrefix)
-                if ref in components.keys():
-                    if len(split_line) == 5:
-                        output.append([ref, components[ref], "TopLayer", split_line[1], split_line[2], split_line[3]])
-                    else:
-                        output.append([ref, components[ref], "BottomLayer", split_line[1], split_line[2], split_line[3]])
+            case "Файл PnP SiDeCo":
+            
+                output = []
+                place = pd.read_excel(type_file_name, skiprows=1, header=None, engine='xlrd')
+                place[1] = place[1].astype(str)
+                print(place)
+                place = place.sort_values(by=1)
                 
-            output_df = pd.DataFrame(output)
 
-        case "Файл PnP SiDeCo":
-            place = pd.read_excel(type_file_name, header=None, engine='xlrd')
-            place = place.sort_values(by=1)
+                for index, row in place.iterrows():
 
-            output = []
+                    ref = str(row[1])
+                    
+                    if ref in components.keys():
+                        if row[4] == "Top":
+                            output.append([ref, components[ref], "TopLayer", row[6], row[7], row[5]])
+                        else:
+                            output.append([ref, components[ref], "BottomLayer", row[6], row[7], row[5]])
+                output_df = pd.DataFrame(output)
+            case _:
+                pass
+    except TypeError as e:
+        log(f"Ошибка типа данных: {e}\nВ одном из столбцов неверный тип данных (либо NaN)\nКонтекст: {inputType}")
+        raise
+    except Exception as e:
+        log(f"Неизвестная ошибка: {e}\nКонтекст: {inputType}")
+        raise
+            
 
-            for index, row in place.iterrows():
-
-                ref = str(row[1])
-                
-                if ref in components.keys():
-                    if row[4] == "Top":
-                        output.append([ref, components[ref], "TopLayer", row[6], row[7], row[5]])
-                    else:
-                        output.append([ref, components[ref], "BottomLayer", row[6], row[7], row[5]])
-            output_df = pd.DataFrame(output)
-
-        case _:
-            pass
+        
 
     match outputType:
         case "Стандартный":

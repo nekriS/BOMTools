@@ -1,5 +1,6 @@
-VERSION = "0.0.4.000-SNAPSHOT"
-DATE = "09.06.2026"
+VERSION = "0.0.4"
+BUILD = "002"
+DATE = "19.06.2026"
 
 # This Python file uses the following encoding: utf-8
 import sys
@@ -30,11 +31,8 @@ import os
 import pyperclip
 
 def resource_path(relative_path):
-    """Получить абсолютный путь к ресурсу, работает для dev и PyInstaller"""
     if hasattr(sys, '_MEIPASS'):
-        # Путь во время выполнения EXE
         return os.path.join(sys._MEIPASS, relative_path)
-    # Путь во время разработки
     return os.path.join(os.path.abspath("."), relative_path)
 
 class PandasModel(QAbstractTableModel):
@@ -88,7 +86,12 @@ class MainWindow(QMainWindow):
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self)
 
-        self.setWindowTitle("BOMTools " + VERSION)
+        icon_path = resource_path("icons/icon.png")
+        my_icon = QIcon()
+        my_icon.addFile(icon_path)
+        self.setWindowIcon(my_icon)
+
+        self.setWindowTitle(f"BOMTools {VERSION} build {BUILD}")
         self.ui.centralwidget.setLayout(self.ui.gridLayout)
         self.ui.groupBox.setLayout(self.ui.gridLayout_4)
         self.ui.compare.setLayout(self.ui.gridLayout_5)
@@ -113,8 +116,6 @@ class MainWindow(QMainWindow):
 
 
     def runPnp_clicked(self):
-        print(1)
-        pass
 
         first_file_name = self.ui.first_file.text()
         first_file_count_column = self.ui.first_count.text()
@@ -124,7 +125,6 @@ class MainWindow(QMainWindow):
 
         table = get_table(first_file_name, f"{first_file_count_column}, C, {first_file_pn_column}, {first_file_mount}, L", first_file_skip_row, ["count", "ref", "pn", "tm", "dpn"])
 
-        print(table)
         if self.ui.exceptDNP.isChecked():
             table = table[table['tm'] != 'DNP']
             table = table[table['tm'] != 'NM']
@@ -429,7 +429,7 @@ class MainWindow(QMainWindow):
             self,
             "О программе",
             "Название программы: BOMTools    \n"
-            "Версия: " + VERSION + "\n"
+            f"Версия: {VERSION} build {BUILD}\n"
             "Автор: Лев Кириллов\n"
             "Дата сборки: " + DATE + "\n"
             "\n"
