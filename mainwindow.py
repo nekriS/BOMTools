@@ -108,7 +108,7 @@ class MainWindow(QMainWindow):
         self.ui.runPnP.clicked.connect(self.runPnp_clicked)
         self.ui.open_cord.clicked.connect(self.open_cord_clicked)
 
-        self.ui.action.triggered.connect(self.show_about_dialog)
+
 
 
 

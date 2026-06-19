@@ -663,7 +663,7 @@ class Ui_MainWindow(object):
         self.pnp.setObjectName(u"pnp")
         self.gridLayoutWidget_8 = QWidget(self.pnp)
         self.gridLayoutWidget_8.setObjectName(u"gridLayoutWidget_8")
-        self.gridLayoutWidget_8.setGeometry(QRect(0, 0, 1001, 510))
+        self.gridLayoutWidget_8.setGeometry(QRect(0, 0, 1061, 510))
         self.gridLayout_9 = QGridLayout(self.gridLayoutWidget_8)
         self.gridLayout_9.setObjectName(u"gridLayout_9")
         self.gridLayout_9.setSizeConstraint(QLayout.SizeConstraint.SetMinimumSize)
