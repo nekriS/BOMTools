@@ -1,5 +1,5 @@
 VERSION = "0.0.4"
-BUILD = "003"
+BUILD = "004"
 DATE = "19.06.2026"
 
 # This Python file uses the following encoding: utf-8
@@ -20,7 +20,7 @@ from PySide6.QtWidgets import (
     QApplication, QMainWindow, QToolBox, QTableView,
     QVBoxLayout, QWidget, QLabel, QHeaderView,QStyle
 )
-
+from PySide6.QtGui import QDesktopServices
 from PySide6.QtCore import QAbstractTableModel, Qt, QUrl
 from PySide6.QtGui import QColor, QIcon
 
@@ -31,10 +31,9 @@ import os
 
 import pyperclip
 
-from PySide6.QtWebEngineWidgets import QWebEngineView
 
-os.environ["QT_QUICK_BACKEND"] = "software"
-os.environ["QTWEBENGINE_DISABLE_GPU"] = "1"
+
+
 
 def resource_path(relative_path):
     if hasattr(sys, '_MEIPASS'):
@@ -86,30 +85,7 @@ class PandasModel(QAbstractTableModel):
 
         return None
 
-class HtmlHelpWindow(QDialog):
-    def __init__(self, file_path, parent=None):
-        super().__init__(parent)
-        self.setWindowTitle("Руководство пользователя")
-        self.resize(800, 600) # Увеличим размер для полноценного сайта
-        
-        layout = QVBoxLayout(self)
-        
-        # Вместо QTextBrowser создаем современный веб-браузер
-        self.web_view = QWebEngineView(self)
-        
 
-        if os.path.exists(file_path):
-            # Важно: для локальных файлов нужно использовать абсолютный путь и схему file:///
-            abs_path = os.path.abspath(file_path)
-            self.web_view.setUrl(QUrl.fromLocalFile(abs_path))
-        else:
-            self.web_view.setHtml(f"<h3 style='color:red;'>Файл не найден: {file_path}</h3>")
-            
-        layout.addWidget(self.web_view)
-        self.web_view.setLayout(layout)
-        #close_btn = QPushButton("Закрыть", self)
-        #close_btn.clicked.connect(self.accept)
-        #layout.addWidget(close_btn)
 
 class MainWindow(QMainWindow):
     def __init__(self, parent=None):
@@ -145,9 +121,15 @@ class MainWindow(QMainWindow):
 
 
     def open_help(self):
-        self.help_window = HtmlHelpWindow("help/help.html", self)
-        self.help_window.show()
-
+        # self.help_window = HtmlHelpWindow(resource_path("help/help.html"), self)
+        # self.help_window.show()
+        help_file_path = resource_path("help/help.html")
+        if os.path.exists(help_file_path):
+            # 2. Превращаем локальный путь в объект QUrl (формата file:///)
+            file_url = QUrl.fromLocalFile(help_file_path)
+            
+            # 3. Команда ОС открыть этот URL в стандартном браузере
+            QDesktopServices.openUrl(file_url)
 
     def runPnp_clicked(self):
 
