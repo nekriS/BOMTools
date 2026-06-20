@@ -771,13 +771,27 @@ class Ui_MainWindow(object):
         self.groupBox_5.setObjectName(u"groupBox_5")
         sizePolicy1.setHeightForWidth(self.groupBox_5.sizePolicy().hasHeightForWidth())
         self.groupBox_5.setSizePolicy(sizePolicy1)
-        self.groupBox_5.setMinimumSize(QSize(740, 115))
+        self.groupBox_5.setMinimumSize(QSize(740, 305))
         self.gridLayoutWidget_9 = QWidget(self.groupBox_5)
         self.gridLayoutWidget_9.setObjectName(u"gridLayoutWidget_9")
-        self.gridLayoutWidget_9.setGeometry(QRect(10, 20, 981, 90))
+        self.gridLayoutWidget_9.setGeometry(QRect(10, 20, 981, 271))
         self.gridLayout_10 = QGridLayout(self.gridLayoutWidget_9)
         self.gridLayout_10.setObjectName(u"gridLayout_10")
-        self.gridLayout_10.setContentsMargins(0, 0, 0, 0)
+        self.gridLayout_10.setContentsMargins(6, 6, 6, 7)
+        self.sourceReper = QComboBox(self.gridLayoutWidget_9)
+        self.sourceReper.addItem("")
+        self.sourceReper.addItem("")
+        self.sourceReper.addItem("")
+        self.sourceReper.setObjectName(u"sourceReper")
+        self.sourceReper.setMinimumSize(QSize(0, 30))
+        self.sourceReper.setMaximumSize(QSize(200, 16777215))
+
+        self.gridLayout_10.addWidget(self.sourceReper, 4, 0, 1, 1)
+
+        self.horizontalSpacer_4 = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
+
+        self.gridLayout_10.addItem(self.horizontalSpacer_4, 0, 4, 1, 1)
+
         self.exceptHAND = QCheckBox(self.gridLayoutWidget_9)
         self.exceptHAND.setObjectName(u"exceptHAND")
         self.exceptHAND.setEnabled(True)
@@ -786,59 +800,89 @@ class Ui_MainWindow(object):
 
         self.gridLayout_10.addWidget(self.exceptHAND, 1, 2, 1, 1)
 
-        self.typeInputPnp = QComboBox(self.gridLayoutWidget_9)
-        self.typeInputPnp.addItem("")
-        self.typeInputPnp.addItem("")
-        self.typeInputPnp.setObjectName(u"typeInputPnp")
-        self.typeInputPnp.setMinimumSize(QSize(0, 30))
-
-        self.gridLayout_10.addWidget(self.typeInputPnp, 1, 0, 1, 1)
-
-        self.typeOutputPnp = QComboBox(self.gridLayoutWidget_9)
-        self.typeOutputPnp.addItem("")
-        self.typeOutputPnp.addItem("")
-        self.typeOutputPnp.setObjectName(u"typeOutputPnp")
-        self.typeOutputPnp.setMinimumSize(QSize(0, 30))
-
-        self.gridLayout_10.addWidget(self.typeOutputPnp, 1, 1, 1, 1)
-
-        self.horizontalSpacer_4 = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
-
-        self.gridLayout_10.addItem(self.horizontalSpacer_4, 0, 5, 1, 1)
-
         self.exceptPrefix = QCheckBox(self.gridLayoutWidget_9)
         self.exceptPrefix.setObjectName(u"exceptPrefix")
         self.exceptPrefix.setEnabled(True)
         self.exceptPrefix.setChecked(True)
         self.exceptPrefix.setTristate(False)
 
-        self.gridLayout_10.addWidget(self.exceptPrefix, 1, 4, 1, 1)
+        self.gridLayout_10.addWidget(self.exceptPrefix, 1, 3, 1, 1)
 
-        self.label_28 = QLabel(self.gridLayoutWidget_9)
-        self.label_28.setObjectName(u"label_28")
-        self.label_28.setMinimumSize(QSize(176, 16))
-        self.label_28.setMaximumSize(QSize(176, 16))
+        self.typeOutputPnp = QComboBox(self.gridLayoutWidget_9)
+        self.typeOutputPnp.addItem("")
+        self.typeOutputPnp.addItem("")
+        self.typeOutputPnp.setObjectName(u"typeOutputPnp")
+        self.typeOutputPnp.setMinimumSize(QSize(0, 30))
+        self.typeOutputPnp.setMaximumSize(QSize(200, 16777215))
 
-        self.gridLayout_10.addWidget(self.label_28, 0, 0, 1, 1)
-
-        self.verticalSpacer = QSpacerItem(20, 40, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Expanding)
-
-        self.gridLayout_10.addItem(self.verticalSpacer, 3, 1, 1, 1)
-
-        self.label_27 = QLabel(self.gridLayoutWidget_9)
-        self.label_27.setObjectName(u"label_27")
-        self.label_27.setMinimumSize(QSize(176, 16))
-        self.label_27.setMaximumSize(QSize(176, 16))
-
-        self.gridLayout_10.addWidget(self.label_27, 0, 1, 1, 1)
+        self.gridLayout_10.addWidget(self.typeOutputPnp, 1, 1, 1, 1)
 
         self.openPnp = QCheckBox(self.gridLayoutWidget_9)
         self.openPnp.setObjectName(u"openPnp")
         self.openPnp.setEnabled(True)
+        self.openPnp.setMaximumSize(QSize(200, 16777215))
         self.openPnp.setChecked(True)
         self.openPnp.setTristate(False)
 
-        self.gridLayout_10.addWidget(self.openPnp, 2, 0, 1, 1)
+        self.gridLayout_10.addWidget(self.openPnp, 5, 0, 1, 1)
+
+        self.typeInputPnp = QComboBox(self.gridLayoutWidget_9)
+        self.typeInputPnp.addItem("")
+        self.typeInputPnp.addItem("")
+        self.typeInputPnp.setObjectName(u"typeInputPnp")
+        self.typeInputPnp.setMinimumSize(QSize(0, 30))
+        self.typeInputPnp.setMaximumSize(QSize(200, 16777215))
+
+        self.gridLayout_10.addWidget(self.typeInputPnp, 1, 0, 1, 1)
+
+        self.reperList = QPlainTextEdit(self.gridLayoutWidget_9)
+        self.reperList.setObjectName(u"reperList")
+
+        self.gridLayout_10.addWidget(self.reperList, 6, 0, 1, 5)
+
+        self.label_28 = QLabel(self.gridLayoutWidget_9)
+        self.label_28.setObjectName(u"label_28")
+        self.label_28.setMinimumSize(QSize(176, 16))
+        self.label_28.setMaximumSize(QSize(200, 16))
+
+        self.gridLayout_10.addWidget(self.label_28, 0, 0, 1, 1)
+
+        self.label_27 = QLabel(self.gridLayoutWidget_9)
+        self.label_27.setObjectName(u"label_27")
+        self.label_27.setMinimumSize(QSize(176, 16))
+        self.label_27.setMaximumSize(QSize(200, 16))
+
+        self.gridLayout_10.addWidget(self.label_27, 3, 0, 1, 1)
+
+        self.label_29 = QLabel(self.gridLayoutWidget_9)
+        self.label_29.setObjectName(u"label_29")
+        self.label_29.setMinimumSize(QSize(176, 16))
+        self.label_29.setMaximumSize(QSize(176, 16))
+
+        self.gridLayout_10.addWidget(self.label_29, 0, 1, 1, 1)
+
+        self.label_30 = QLabel(self.gridLayoutWidget_9)
+        self.label_30.setObjectName(u"label_30")
+        self.label_30.setEnabled(True)
+        self.label_30.setMinimumSize(QSize(176, 16))
+        self.label_30.setMaximumSize(QSize(176, 16))
+
+        self.gridLayout_10.addWidget(self.label_30, 3, 1, 1, 1)
+
+        self.repermatch = QLineEdit(self.gridLayoutWidget_9)
+        self.repermatch.setObjectName(u"repermatch")
+        sizePolicy.setHeightForWidth(self.repermatch.sizePolicy().hasHeightForWidth())
+        self.repermatch.setSizePolicy(sizePolicy)
+        self.repermatch.setMinimumSize(QSize(176, 30))
+        self.repermatch.setMaximumSize(QSize(200, 30))
+        self.repermatch.setStyleSheet(u"\n"
+"	border: 1px solid #CCCCCC;\n"
+"	padding: -2px 10px;\n"
+"	font-size: 14px;\n"
+"	border-radius: 5px;\n"
+"")
+
+        self.gridLayout_10.addWidget(self.repermatch, 4, 1, 1, 1)
 
 
         self.gridLayout_9.addWidget(self.groupBox_5, 2, 0, 1, 3)
@@ -928,17 +972,28 @@ class Ui_MainWindow(object):
         self.label_24.setText(QCoreApplication.translate("MainWindow", u"\u0424\u0430\u0439\u043b \u043d\u0435 \u043e\u0442\u043a\u0440\u044b\u0442", None))
         self.runPnP.setText(QCoreApplication.translate("MainWindow", u"\u0421\u0433\u0435\u043d\u0435\u0440\u0438\u0440\u043e\u0432\u0430\u0442\u044c", None))
         self.groupBox_5.setTitle(QCoreApplication.translate("MainWindow", u"\u041d\u0430\u0441\u0442\u0440\u043e\u0439\u043a\u0438", None))
-        self.exceptHAND.setText(QCoreApplication.translate("MainWindow", u"\u0418\u0441\u043a\u043b\u044e\u0447\u0438\u0442\u044c HAND", None))
-        self.typeInputPnp.setItemText(0, QCoreApplication.translate("MainWindow", u"\u0424\u0430\u0439\u043b place (Allegro)", None))
-        self.typeInputPnp.setItemText(1, QCoreApplication.translate("MainWindow", u"\u0424\u0430\u0439\u043b PnP SiDeCo", None))
+        self.sourceReper.setItemText(0, QCoreApplication.translate("MainWindow", u"\u0414\u043e\u0431\u0430\u0432\u0438\u0442\u044c \u0432\u0440\u0443\u0447\u043d\u0443\u044e", None))
+        self.sourceReper.setItemText(1, QCoreApplication.translate("MainWindow", u"\u041f\u043e\u043f\u0440\u043e\u0431\u043e\u0432\u0430\u0442\u044c \u0438\u043c\u043f\u043e\u0440\u0442\u0438\u0440\u043e\u0432\u0430\u0442\u044c", None))
+        self.sourceReper.setItemText(2, QCoreApplication.translate("MainWindow", u"\u041d\u0435 \u0434\u043e\u0431\u0430\u0432\u043b\u044f\u0442\u044c", None))
 
+        self.exceptHAND.setText(QCoreApplication.translate("MainWindow", u"\u0418\u0441\u043a\u043b\u044e\u0447\u0438\u0442\u044c HAND", None))
+        self.exceptPrefix.setText(QCoreApplication.translate("MainWindow", u"\u0418\u0441\u043a\u043b\u044e\u0447\u0438\u0442\u044c \u043f\u0440\u0438\u0441\u0442\u0430\u0432\u043a\u0438", None))
         self.typeOutputPnp.setItemText(0, QCoreApplication.translate("MainWindow", u"\u0421\u0442\u0430\u043d\u0434\u0430\u0440\u0442\u043d\u044b\u0439", None))
         self.typeOutputPnp.setItemText(1, QCoreApplication.translate("MainWindow", u"\u0424\u0430\u0439\u043b .xlsx \u0441 \u0446\u0432\u0435\u0442\u043d\u043e\u0439 \u043c\u0430\u0440\u043a\u0438\u0440\u043e\u0432\u043a\u043e\u0439", None))
 
-        self.exceptPrefix.setText(QCoreApplication.translate("MainWindow", u"\u0418\u0441\u043a\u043b\u044e\u0447\u0438\u0442\u044c \u043f\u0440\u0438\u0441\u0442\u0430\u0432\u043a\u0438", None))
-        self.label_28.setText(QCoreApplication.translate("MainWindow", u"\u0422\u0438\u043f \u0432\u0445\u043e\u0434\u043d\u043e\u0433\u043e \u0444\u0430\u0439\u043b\u0430:", None))
-        self.label_27.setText(QCoreApplication.translate("MainWindow", u"\u0422\u0438\u043f \u0432\u044b\u0445\u043e\u0434\u043d\u043e\u0433\u043e \u0444\u0430\u0439\u043b\u0430:", None))
         self.openPnp.setText(QCoreApplication.translate("MainWindow", u"\u041e\u0442\u043a\u0440\u044b\u0442\u044c \u0444\u0430\u0439\u043b \u043f\u043e\u0441\u043b\u0435 \u0433\u0435\u043d\u0435\u0440\u0430\u0446\u0438\u0438", None))
+        self.typeInputPnp.setItemText(0, QCoreApplication.translate("MainWindow", u"\u0424\u0430\u0439\u043b place (Allegro)", None))
+        self.typeInputPnp.setItemText(1, QCoreApplication.translate("MainWindow", u"\u0424\u0430\u0439\u043b PnP SiDeCo", None))
+
+        self.reperList.setPlainText(QCoreApplication.translate("MainWindow", u"# \u0412\u0432\u0435\u0434\u0438\u0442\u0435 \u043f\u0430\u0440\u0430\u043c\u0435\u0442\u0440\u044b \u0440\u0435\u043f\u0435\u0440\u043d\u044b\u0445 \u0442\u043e\u0447\u0435\u043a (\u043a\u0430\u0436\u0434\u043e\u0439 \u0441 \u043d\u043e\u0432\u043e\u0439 \u0441\u0442\u0440\u043e\u043a\u0438) \u0432 \u0444\u043e\u0440\u043c\u0430\u0442\u0435:\n"
+"# \u041e\u0411\u041e\u0417\u041d\u0410\u0427\u0415\u041d\u0418\u0415 \u0421\u041b\u041e\u0419 X Y \u0423\u0413\u041e\u041b\n"
+"# \u041d\u0430\u043f\u0440\u0438\u043c\u0435\u0440:\n"
+"# RP1 Top 10 10 0", None))
+        self.label_28.setText(QCoreApplication.translate("MainWindow", u"\u0422\u0438\u043f \u0432\u0445\u043e\u0434\u043d\u043e\u0433\u043e \u0444\u0430\u0439\u043b\u0430:", None))
+        self.label_27.setText(QCoreApplication.translate("MainWindow", u"\u0420\u0435\u043f\u0435\u0440\u043d\u044b\u0435 \u0442\u043e\u0447\u043a\u0438:", None))
+        self.label_29.setText(QCoreApplication.translate("MainWindow", u"\u0422\u0438\u043f \u0432\u044b\u0445\u043e\u0434\u043d\u043e\u0433\u043e \u0444\u0430\u0439\u043b\u0430:", None))
+        self.label_30.setText(QCoreApplication.translate("MainWindow", u"\u041c\u0430\u0441\u043a\u0430 \u0440\u0435\u0444\u0435\u0440\u0435\u043d\u0441\u0430:", None))
+        self.repermatch.setText(QCoreApplication.translate("MainWindow", u"*REP*", None))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.pnp), QCoreApplication.translate("MainWindow", u"\u0413\u0435\u043d\u0435\u0440\u0430\u0446\u0438\u044f PnP", None))
         self.menu.setTitle(QCoreApplication.translate("MainWindow", u"\u0421\u043f\u0440\u0430\u0432\u043a\u0430", None))
     # retranslateUi

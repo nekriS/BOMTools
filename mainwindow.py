@@ -1,6 +1,6 @@
-VERSION = "0.0.4"
-BUILD = "004"
-DATE = "19.06.2026"
+VERSION = "0.0.5"
+BUILD = "001"
+DATE = "20.06.2026"
 
 # This Python file uses the following encoding: utf-8
 import sys
@@ -84,8 +84,26 @@ class PandasModel(QAbstractTableModel):
                 return str(self._data.index[section])
 
         return None
+    
+from PySide6.QtCore import QRegularExpression
+from PySide6.QtGui import QColor, QFont, QTextCharFormat, QSyntaxHighlighter
+class CommentHighlighter(QSyntaxHighlighter):
+    """Класс для подсветки строк, начинающихся с #."""
 
+    def __init__(self, parent=None):
+        super().__init__(parent)
 
+        self.comment_format = QTextCharFormat()
+        self.comment_format.setForeground(QColor("green"))
+        self.expression = QRegularExpression(r"^#.*")
+
+    def highlightBlock(self, text):
+        match_iterator = self.expression.globalMatch(text)
+        while match_iterator.hasNext():
+            match = match_iterator.next()
+            start_index = match.capturedStart()
+            length = match.capturedLength()
+            self.setFormat(start_index, length, self.comment_format)
 
 class MainWindow(QMainWindow):
     def __init__(self, parent=None):
@@ -103,7 +121,9 @@ class MainWindow(QMainWindow):
         self.ui.groupBox.setLayout(self.ui.gridLayout_4)
         self.ui.compare.setLayout(self.ui.gridLayout_5)
         self.ui.optimization.setLayout(self.ui.gridLayout_2)
-        self.ui.pnp.setLayout(self.ui.gridLayout_9)    
+        self.ui.pnp.setLayout(self.ui.gridLayout_9) 
+
+        self.ui.groupBox_5.setLayout(self.ui.gridLayout_10)   
 
         self.ui.compareButton.clicked.connect(self.compareButton_clicked)
         self.ui.optimizeButton.clicked.connect(self.optimizeButton_clicked)
@@ -119,6 +139,36 @@ class MainWindow(QMainWindow):
         self.ui.runPnP.clicked.connect(self.runPnp_clicked)
         self.ui.open_cord.clicked.connect(self.open_cord_clicked)
 
+        self.ui.sourceReper.currentTextChanged.connect(self.sourseReperChanged)
+
+        self.highlighter = CommentHighlighter(self.ui.reperList.document())
+
+        self.ui.label_30.hide()
+        self.ui.repermatch.hide()
+
+    def sourseReperChanged(self):
+        sourceReperValue = self.ui.sourceReper.currentIndex()
+        match sourceReperValue:
+            case 1:
+                self.ui.reperList.hide()
+                self.ui.groupBox_5.setMinimumSize(740, 170)
+
+                self.ui.label_30.show()
+                self.ui.repermatch.show()
+            case 2:
+                self.ui.reperList.hide()
+                self.ui.groupBox_5.setMinimumSize(740, 170)
+
+                self.ui.label_30.hide()
+                self.ui.repermatch.hide()
+            case 0:
+                self.ui.reperList.show()
+                self.ui.groupBox_5.setMinimumSize(740, 302)
+
+                self.ui.label_30.hide()
+                self.ui.repermatch.hide()
+            case _:
+                pass
 
     def open_help(self):
         # self.help_window = HtmlHelpWindow(resource_path("help/help.html"), self)
@@ -138,6 +188,10 @@ class MainWindow(QMainWindow):
         first_file_pn_column = self.ui.first_pn.text()
         first_file_skip_row = int(self.ui.first_skip.text())
         first_file_mount = self.ui.firstMount.text()
+
+        reper_type = self.ui.sourceReper.currentIndex()
+        reper_list = self.ui.reperList.toPlainText().split('\n')
+        reper_match = self.ui.repermatch.text()
 
         table = get_table(first_file_name, f"{first_file_count_column}, C, {first_file_pn_column}, {first_file_mount}, L", first_file_skip_row, ["count", "ref", "pn", "tm", "dpn"])
 
@@ -160,7 +214,7 @@ class MainWindow(QMainWindow):
         if "_SP" in output_file_name:
             output_file_name = output_file_name[:output_file_name.find("_SP")]
 
-        generatePnp(table, type_file_name, inputType, outputType, f"{output_file_name}", self.ui.exceptPrefix.isChecked(), self.ui.openPnp.isChecked())
+        generatePnp(table, type_file_name, inputType, outputType, f"{output_file_name}", self.ui.exceptPrefix.isChecked(), reper_type, reper_list, reper_match, self.ui.openPnp.isChecked())
 
 
     def copyResultButton_clicked(self):
@@ -181,7 +235,7 @@ class MainWindow(QMainWindow):
             table = table[table['tm'] != 'NM']
             table = table[table['tm'] != 'NOT MOUNT']
 
-        print(table)
+        #print(table)
 
         #table = table.fillna('X')
 

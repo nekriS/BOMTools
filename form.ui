@@ -1523,7 +1523,7 @@ QPushButton:pressed {
             <property name="minimumSize">
              <size>
               <width>740</width>
-              <height>115</height>
+              <height>305</height>
              </size>
             </property>
             <property name="title">
@@ -1535,10 +1535,66 @@ QPushButton:pressed {
                <x>10</x>
                <y>20</y>
                <width>981</width>
-               <height>90</height>
+               <height>271</height>
               </rect>
              </property>
              <layout class="QGridLayout" name="gridLayout_10">
+              <property name="leftMargin">
+               <number>6</number>
+              </property>
+              <property name="topMargin">
+               <number>6</number>
+              </property>
+              <property name="rightMargin">
+               <number>6</number>
+              </property>
+              <property name="bottomMargin">
+               <number>7</number>
+              </property>
+              <item row="4" column="0">
+               <widget class="QComboBox" name="sourceReper">
+                <property name="minimumSize">
+                 <size>
+                  <width>0</width>
+                  <height>30</height>
+                 </size>
+                </property>
+                <property name="maximumSize">
+                 <size>
+                  <width>200</width>
+                  <height>16777215</height>
+                 </size>
+                </property>
+                <item>
+                 <property name="text">
+                  <string>Добавить вручную</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>Попробовать импортировать</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>Не добавлять</string>
+                 </property>
+                </item>
+               </widget>
+              </item>
+              <item row="0" column="4">
+               <spacer name="horizontalSpacer_4">
+                <property name="orientation">
+                 <enum>Qt::Orientation::Horizontal</enum>
+                </property>
+                <property name="sizeHint" stdset="0">
+                 <size>
+                  <width>40</width>
+                  <height>20</height>
+                 </size>
+                </property>
+               </spacer>
+              </item>
               <item row="1" column="2">
                <widget class="QCheckBox" name="exceptHAND">
                 <property name="enabled">
@@ -1555,60 +1611,7 @@ QPushButton:pressed {
                 </property>
                </widget>
               </item>
-              <item row="1" column="0">
-               <widget class="QComboBox" name="typeInputPnp">
-                <property name="minimumSize">
-                 <size>
-                  <width>0</width>
-                  <height>30</height>
-                 </size>
-                </property>
-                <item>
-                 <property name="text">
-                  <string>Файл place (Allegro)</string>
-                 </property>
-                </item>
-                <item>
-                 <property name="text">
-                  <string>Файл PnP SiDeCo</string>
-                 </property>
-                </item>
-               </widget>
-              </item>
-              <item row="1" column="1">
-               <widget class="QComboBox" name="typeOutputPnp">
-                <property name="minimumSize">
-                 <size>
-                  <width>0</width>
-                  <height>30</height>
-                 </size>
-                </property>
-                <item>
-                 <property name="text">
-                  <string>Стандартный</string>
-                 </property>
-                </item>
-                <item>
-                 <property name="text">
-                  <string>Файл .xlsx с цветной маркировкой</string>
-                 </property>
-                </item>
-               </widget>
-              </item>
-              <item row="0" column="5">
-               <spacer name="horizontalSpacer_4">
-                <property name="orientation">
-                 <enum>Qt::Orientation::Horizontal</enum>
-                </property>
-                <property name="sizeHint" stdset="0">
-                 <size>
-                  <width>40</width>
-                  <height>20</height>
-                 </size>
-                </property>
-               </spacer>
-              </item>
-              <item row="1" column="4">
+              <item row="1" column="3">
                <widget class="QCheckBox" name="exceptPrefix">
                 <property name="enabled">
                  <bool>true</bool>
@@ -1624,6 +1627,90 @@ QPushButton:pressed {
                 </property>
                </widget>
               </item>
+              <item row="1" column="1">
+               <widget class="QComboBox" name="typeOutputPnp">
+                <property name="minimumSize">
+                 <size>
+                  <width>0</width>
+                  <height>30</height>
+                 </size>
+                </property>
+                <property name="maximumSize">
+                 <size>
+                  <width>200</width>
+                  <height>16777215</height>
+                 </size>
+                </property>
+                <item>
+                 <property name="text">
+                  <string>Стандартный</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>Файл .xlsx с цветной маркировкой</string>
+                 </property>
+                </item>
+               </widget>
+              </item>
+              <item row="5" column="0">
+               <widget class="QCheckBox" name="openPnp">
+                <property name="enabled">
+                 <bool>true</bool>
+                </property>
+                <property name="maximumSize">
+                 <size>
+                  <width>200</width>
+                  <height>16777215</height>
+                 </size>
+                </property>
+                <property name="text">
+                 <string>Открыть файл после генерации</string>
+                </property>
+                <property name="checked">
+                 <bool>true</bool>
+                </property>
+                <property name="tristate">
+                 <bool>false</bool>
+                </property>
+               </widget>
+              </item>
+              <item row="1" column="0">
+               <widget class="QComboBox" name="typeInputPnp">
+                <property name="minimumSize">
+                 <size>
+                  <width>0</width>
+                  <height>30</height>
+                 </size>
+                </property>
+                <property name="maximumSize">
+                 <size>
+                  <width>200</width>
+                  <height>16777215</height>
+                 </size>
+                </property>
+                <item>
+                 <property name="text">
+                  <string>Файл place (Allegro)</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>Файл PnP SiDeCo</string>
+                 </property>
+                </item>
+               </widget>
+              </item>
+              <item row="6" column="0" colspan="5">
+               <widget class="QPlainTextEdit" name="reperList">
+                <property name="plainText">
+                 <string># Введите параметры реперных точек (каждой с новой строки) в формате:
+# ОБОЗНАЧЕНИЕ СЛОЙ X Y УГОЛ
+# Например:
+# RP1 Top 10 10 0</string>
+                </property>
+               </widget>
+              </item>
               <item row="0" column="0">
                <widget class="QLabel" name="label_28">
                 <property name="minimumSize">
@@ -1634,7 +1721,7 @@ QPushButton:pressed {
                 </property>
                 <property name="maximumSize">
                  <size>
-                  <width>176</width>
+                  <width>200</width>
                   <height>16</height>
                  </size>
                 </property>
@@ -1643,21 +1730,27 @@ QPushButton:pressed {
                 </property>
                </widget>
               </item>
-              <item row="3" column="1">
-               <spacer name="verticalSpacer">
-                <property name="orientation">
-                 <enum>Qt::Orientation::Vertical</enum>
-                </property>
-                <property name="sizeHint" stdset="0">
+              <item row="3" column="0">
+               <widget class="QLabel" name="label_27">
+                <property name="minimumSize">
                  <size>
-                  <width>20</width>
-                  <height>40</height>
+                  <width>176</width>
+                  <height>16</height>
                  </size>
                 </property>
-               </spacer>
+                <property name="maximumSize">
+                 <size>
+                  <width>200</width>
+                  <height>16</height>
+                 </size>
+                </property>
+                <property name="text">
+                 <string>Реперные точки:</string>
+                </property>
+               </widget>
               </item>
               <item row="0" column="1">
-               <widget class="QLabel" name="label_27">
+               <widget class="QLabel" name="label_29">
                 <property name="minimumSize">
                  <size>
                   <width>176</width>
@@ -1675,19 +1768,58 @@ QPushButton:pressed {
                 </property>
                </widget>
               </item>
-              <item row="2" column="0">
-               <widget class="QCheckBox" name="openPnp">
+              <item row="3" column="1">
+               <widget class="QLabel" name="label_30">
                 <property name="enabled">
                  <bool>true</bool>
                 </property>
+                <property name="minimumSize">
+                 <size>
+                  <width>176</width>
+                  <height>16</height>
+                 </size>
+                </property>
+                <property name="maximumSize">
+                 <size>
+                  <width>176</width>
+                  <height>16</height>
+                 </size>
+                </property>
                 <property name="text">
-                 <string>Открыть файл после генерации</string>
+                 <string>Маска референса:</string>
                 </property>
-                <property name="checked">
-                 <bool>true</bool>
+               </widget>
+              </item>
+              <item row="4" column="1">
+               <widget class="QLineEdit" name="repermatch">
+                <property name="sizePolicy">
+                 <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+                  <horstretch>0</horstretch>
+                  <verstretch>0</verstretch>
+                 </sizepolicy>
                 </property>
-                <property name="tristate">
-                 <bool>false</bool>
+                <property name="minimumSize">
+                 <size>
+                  <width>176</width>
+                  <height>30</height>
+                 </size>
+                </property>
+                <property name="maximumSize">
+                 <size>
+                  <width>200</width>
+                  <height>30</height>
+                 </size>
+                </property>
+                <property name="styleSheet">
+                 <string notr="true">
+	border: 1px solid #CCCCCC;
+	padding: -2px 10px;
+	font-size: 14px;
+	border-radius: 5px;
+</string>
+                </property>
+                <property name="text">
+                 <string>*REP*</string>
                 </property>
                </widget>
               </item>

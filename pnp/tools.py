@@ -3,6 +3,7 @@ import os
 import openpyxl as oxl
 from openpyxl.styles import PatternFill, Alignment, Border, Side, Font
 from system import log
+import fnmatch
 
 PREFIXIES = ["C", "R", "D", "F", "X", "S", "Q", "VT", "VD"]
 
@@ -66,7 +67,7 @@ def findNumber(line: str):
                 return(str(line[:i]), int(line[i:j]))
     return -1
 
-def generatePnp(table: pd.Dataframe, type_file_name, inputType, outputType, outputName, exceptPrefix, openFile=True):
+def generatePnp(table: pd.Dataframe, type_file_name, inputType, outputType, outputName, exceptPrefix, reper_type, reper_list, reper_match, openFile=True):
     
     file = ""
     components = {}
@@ -106,6 +107,21 @@ def generatePnp(table: pd.Dataframe, type_file_name, inputType, outputType, outp
                 place = place.sort_values(by=0)
 
                 output = []
+                match reper_type:
+                    case 0:
+                        for line in reper_list:
+                            if line.strip()[0] != "#":
+                                line_s = line.split(" ")
+                                match line_s[1].lower():
+                                    case "top":
+                                        layer = "TopLayer"
+                                    case "bottom":
+                                        layer = "BottomLayer"
+                                    case _:
+                                        log(f"Реперная точка {line_s[0]}: не указан слой или он некорректный.")
+                                output.append([line_s[0], "REPER", layer, f"{float(line_s[2]):.3f}", f"{float(line_s[3]):.3f}", f"{float(line_s[4]):.3f}"])
+                    case 1:
+                        pass
 
                 for index, row in place.iterrows():
                     line = row.values[0]
@@ -121,18 +137,38 @@ def generatePnp(table: pd.Dataframe, type_file_name, inputType, outputType, outp
                 output_df = pd.DataFrame(output)
 
             case "Файл PnP SiDeCo":
-            
-                output = []
+
                 place = pd.read_excel(type_file_name, skiprows=1, header=None, engine='xlrd')
                 place[1] = place[1].astype(str)
                 print(place)
                 place = place.sort_values(by=1)
-                
+                output = []
+
+                match reper_type:
+                    case 0:
+                        for line in reper_list:
+                            if line.strip()[0] != "#":
+                                line_s = line.split(" ")
+                                match line_s[1].lower():
+                                    case "top":
+                                        layer = "TopLayer"
+                                    case "bottom":
+                                        layer = "BottomLayer"
+                                    case _:
+                                        log(f"Реперная точка {line_s[0]}: не указан слой или он некорректный.")
+                                output.append([line_s[0], "REPER", layer, f"{float(line_s[2]):.3f}", f"{float(line_s[3]):.3f}", f"{float(line_s[4]):.3f}"])
+                    case 1:
+                        for index, row in place.iterrows():
+                            ref = str(row[1])
+                            if fnmatch.fnmatch(ref, f"{reper_match}"):
+                                if row[4] == "Top":
+                                    output.append([ref, "REPER", "TopLayer", row[6], row[7], row[5]])
+                                else:
+                                    output.append([ref, "REPER", "BottomLayer", row[6], row[7], row[5]])            
 
                 for index, row in place.iterrows():
 
                     ref = str(row[1])
-                    
                     if ref in components.keys():
                         if row[4] == "Top":
                             output.append([ref, components[ref], "TopLayer", row[6], row[7], row[5]])
@@ -183,14 +219,15 @@ def generatePnp(table: pd.Dataframe, type_file_name, inputType, outputType, outp
             row_n = 6
             for index, row in output_df.iterrows():
                 ref = row[0]
-                if ref in hand:
-                    color = color_blue
-                elif ref in dnp:
-                    color = color_yellow
-                else:
-                    color = color_green
-                for column in range(1,len(row)+1):
-                    sheet.cell(row=row_n+index, column=column).fill = color
+                if row[1] != "REPER":
+                    if ref in hand:
+                        color = color_blue
+                    elif ref in dnp:
+                        color = color_yellow
+                    else:
+                        color = color_green
+                    for column in range(1,len(row)+1):
+                        sheet.cell(row=row_n+index, column=column).fill = color
                 
             set_column_autowidth(sheet, ["A", "B", "C", "D", "E", "F", "G", "H", "I"])
 
