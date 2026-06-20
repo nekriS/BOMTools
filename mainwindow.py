@@ -1,5 +1,5 @@
 VERSION = "0.0.5"
-BUILD = "001"
+BUILD = "002"
 DATE = "20.06.2026"
 
 # This Python file uses the following encoding: utf-8

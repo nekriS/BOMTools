@@ -1861,7 +1861,7 @@ QPushButton:pressed {
   </action>
   <action name="help">
    <property name="text">
-    <string>Справка</string>
+    <string>Руководство пользователя</string>
    </property>
   </action>
  </widget>
