@@ -1,6 +1,6 @@
 import Levenshtein
 import pandas as pd
-#from system import log
+from system import log
 
 LETTERS = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U"]
 

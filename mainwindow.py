@@ -1,11 +1,11 @@
 VERSION = "0.0.5"
-BUILD = "002"
-DATE = "20.06.2026"
+BUILD = "003"
+DATE = "03.07.2026"
 
 # This Python file uses the following encoding: utf-8
 import sys
 
-from PySide6.QtWidgets import QApplication, QMainWindow, QFrame, QMessageBox, QFileDialog, QPushButton, QTextBrowser, QDialog
+from PySide6.QtWidgets import QApplication, QMainWindow, QMessageBox, QFileDialog
 from compare.tools import compare, get_table
 from optimize.tools import getTableByRequest, is_number
 from pnp.tools import generatePnp
@@ -17,8 +17,7 @@ from pnp.tools import generatePnp
 from ui_form import Ui_MainWindow
 
 from PySide6.QtWidgets import (
-    QApplication, QMainWindow, QToolBox, QTableView,
-    QVBoxLayout, QWidget, QLabel, QHeaderView,QStyle
+    QApplication, QMainWindow, QTableView, QHeaderView
 )
 from PySide6.QtGui import QDesktopServices
 from PySide6.QtCore import QAbstractTableModel, Qt, QUrl

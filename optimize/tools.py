@@ -77,14 +77,9 @@ def getTableByRequest(table, request):
     output_table = pd.DataFrame()
 
     for index, row in table.iterrows():
-        if fnmatch.fnmatch(row['pn'], f"*{request}*"):
-            #new_row = row
-            #print(row)
-
-            new_row = concatRow(row, splittedLine(row['pn'], getTypeByReference(row['ref'])))
-            
-            #print(new_row)
-            #new_row = splittedLine(row['pn'])
+        part_number = str(row['pn'])
+        if fnmatch.fnmatch(part_number, f"*{str(request)}*"):
+            new_row = concatRow(row, splittedLine(part_number, getTypeByReference(row['ref'])))
             output_table = pd.concat([output_table, new_row], axis=1, ignore_index=True)
 
     #print(output_table)
