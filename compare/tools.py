@@ -1,6 +1,6 @@
 import Levenshtein
 import pandas as pd
-from system import log
+#from system import log
 
 LETTERS = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U"]
 
@@ -85,7 +85,7 @@ def compare(first_table, second_table, kLev):
 
 def compare_the_lines(str1, str2, kLev):
 
-    Levenshtein_c = 1 - Levenshtein.distance(str1, str2) / max(len(str1), len(str2))
+    Levenshtein_c = 1 - Levenshtein.distance(str(str1), str(str2)) / max(len(str(str1)), len(str(str2)))
     
     if str1 == str2:
         return 'equal'
@@ -125,25 +125,35 @@ def find_line_in_table(line, table, kLev):
 if __name__ == "__main__":
 
 
-    first_file_name = "MILK_SHAKER_V_25177_R1_SP.xlsx"
+    first_file_name = "Translated.xlsx"
+    first_file_count_column = "B"
+    first_file_pn_column = "E"
+    first_file_skip_row = 4
+    first_file_mount = "F"
+
+    table1 = get_table(first_file_name, f"{first_file_count_column}, C, {first_file_pn_column}, {first_file_mount}, L", first_file_skip_row, ["count", "ref", "pn", "tm", "dpn"])
+
+
+    first_file_name = "Argo_BPL_jAX8A_21055(01)_SP.xlsx"
     first_file_count_column = "B"
     first_file_pn_column = "F"
-    first_file_skip_row = 8
+    first_file_skip_row = 4
     first_file_mount = "H"
 
-    table = get_table(first_file_name, f"{first_file_count_column}, C, {first_file_pn_column}, {first_file_mount}, L", first_file_skip_row, ["count", "ref", "pn", "tm", "dpn"])
+    table2 = get_table(first_file_name, f"{first_file_count_column}, C, {first_file_pn_column}, {first_file_mount}, L", first_file_skip_row, ["count", "ref", "pn", "tm", "dpn"])
 
 
+    print(compare(table1, table2, 1))
     #table = pd.read_excel(first_file_name, usecols=f"{first_file_count_column}, L", skiprows=skip_row)
 
 
-    print(table)
+    # print(table)
 
-    if 0:
-        table = table[table['tm'] != 'DNP']
-        table = table[table['tm'] != 'NM']
+    # if 0:
+    #     table = table[table['tm'] != 'DNP']
+    #     table = table[table['tm'] != 'NM']
 
-    print(table)
+    # print(table)
 
     
     # first_file_name = "CS_Trans2_TEST_SP_1.xlsx"
